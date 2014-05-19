@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width; initial-scale=1"/>
+		<title>Präsentation WebApp</title>
+		
+		<!-- Bootstrap einbinden -->
+		<link href="bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+		
+		<!-- HTML5 Shim und Respond.js einbinden -->
+		<!-- HTML5 und Responive-Unterstützung für Internetexplorer kleiner als IE9 -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      	<![endif]-->
+      	
+      	<!-- Custom StyleSheet -->
+      	<link href="css/custom.css" rel="stylesheet" />
+	</head>
+	<body>
+		
+		<div class="navbar-wrapper">
+			<div class="container">
+			<!-- Navigation - START -->
+			<nav class="navbar navbar-inverse" role="navigation">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="#" class="navbar-brand">Title</a>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="#">Link</a></li>
+							<li><a href="#">Link</a></li>
+							<li><a href="#">Link</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<!-- Navigation - ENDE -->
+		</div>
+		</div>
+		
+		<!-- Impress - START -->
+		<div id="impress">
+		
+			<div class="step slide">
+		        <q>Aren't you just <b>bored</b> with all those slides-based presentations?</q>
+		    </div>
+		    
+		    <div class="step slide" data-x="-1000" data-y="-1500">
+		        <q>Aren't you just <b>bored</b> with all those slides-based presentations?</q>
+		    </div>
+			
+		</div>
+		<!-- Impress - ENDE -->
+		
+		<!-- jQuery einbinden -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
+		<!-- ImpressJS -->
+		<script src="impress/impress.js"></script>
+		<script>impress().init();</script>
+	</body>
+</html>
