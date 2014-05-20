@@ -7,14 +7,14 @@ HTML, BODY{
 }
 
 BODY{
-	background: #eeeeee; /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  #eeeeee 0%,#cccccc 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
-	background: radial-gradient(ellipse at center,  #eeeeee 0%,#cccccc 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	background: #ffffff; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#cccccc 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#cccccc 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #ffffff 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	
 	font-family: 'Oswald', sans-serif;
 }
@@ -66,20 +66,26 @@ DIV.slide.active{
 	transition:opacity 2000ms ease-out;
 }
 
+DIV.slide H1{
+	font-size:60px;
+	text-shadow: 1px 5px 10px #666;
+}
+
+DIV.slide P{
+	font-size:24px;
+	font-weight:lighter;
+	padding:0 0 45px 0;
+}
+
+DIV.slide LI{
+	font-size:24px;
+	font-weight:lighter;
+}
+
 
 /* --- difference --- */
 #thedifference{
 	width:600px;
-}
-
-#thedifference H1{
-	font-weight:bold;
-	font-size:50px;
-}
-
-#thedifference P{
-	font-size:24px;
-	font-weight:lighter
 }
 
 #thedifference IMG.imageLeft{float:left}
@@ -93,15 +99,6 @@ DIV.slide.active{
 	width:400px;
 }
 
-#thedifference_detail H1{
-	font-size:60px;
-}
-
-#thedifference_detail P{
-	font-size:24px;
-	font-weight:lighter
-}
-
 /* --- vorundnachteile --- */
 #vorundnachteile{
 	width:750px;
@@ -110,21 +107,14 @@ DIV.slide.active{
 #vorundnachteile .left{float:left}
 #vorundnachteile .right{float:right}
 
-#vorundnachteile H1{
-	font-size:60px;
-}
-	
-#vorundnachteile UL{
-	font-size:24px;
-	font-weight:lighter;
-}
-
 #vorundnachteile UL LI{
 	list-style-type:none;	
 }
 
-
-
+/* --- wasistmobil --- */
+#wasistmobil{
+	width:600px;
+}
 
 
 
