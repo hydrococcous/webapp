@@ -17,7 +17,9 @@
       	<![endif]-->
       	
       	<!-- Custom StyleSheet -->
+      	<link href="css/fonts.css" rel="stylesheet" />
       	<link href="css/custom.css" rel="stylesheet" />
+      	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 		
@@ -33,13 +35,13 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a href="#" class="navbar-brand">Title</a>
+						<a href="/webapp" class="navbar-brand">Einleitung</a>
 					</div>
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
-							<li><a href="#">Link</a></li>
-							<li><a href="#">Link</a></li>
-							<li><a href="#">Link</a></li>
+							<li><a href="#">HTML5</a></li>
+							<li><a href="#">Techniken</a></li>
+							<li><a href="#">Barrierefreiheit</a></li>
 						</ul>
 					</div>
 				</div>
@@ -51,13 +53,58 @@
 		<!-- Impress - START -->
 		<div id="impress">
 		
-			<div class="step slide">
-		        <q>Aren't you just <b>bored</b> with all those slides-based presentations?</q>
+			<div id="thedifference" class="step slide" data-x="0" data-y="-1500">
+		        <h1>WebApp vs. App*</h1>
+		        <p>Was ist der Unterschied</p>
+		        <img src="media/downloads/logo_html5.png" width="290" class="imageLeft" />
+		        <img src="media/downloads/logo_appstore.png" width="300"  class="imageRight" />
 		    </div>
 		    
-		    <div class="step slide" data-x="-1000" data-y="-1500">
-		        <q>Aren't you just <b>bored</b> with all those slides-based presentations?</q>
+		    
+		    <div id="thedifference_detail" class="step slide" data-x="0" data-y="-2200" data-z="1000" data-rotate="-90">
+		        <h1>App*</h1>
+		        <p>Eine App ist eine native Software, entwickelt für ein bestimmtes Betriebssystem. </p>
+		        <h1>WebApp*</h1>
+		        <p>Eine WebApp ist eine Anwendung die in einem Browser läuft.</p>
 		    </div>
+		    
+		    
+		    <div id="vorundnachteile" class="step slide" data-x="2000" data-y="0" data-scale="1" data-z="2000" data-rotate="110">
+		        <div class="left">
+		        	<h1>Nachteile*</h1>
+		        	<ul>
+		        		<li class="entypo-icon" title="&#8854;">eingeschränketer Hardwarezugriff</li>
+		        		<li class="entypo-icon" title="&#8854;">keine Push-Nachrichten</li>
+		        		<li>&nbsp;</li>
+		        		<li><img src="media/downloads/logo_html5.png" width="290"  /></li>
+		        	</ul>
+		        </div>
+		        <div class="right">
+		        	<h1>Vorteile*</h1>
+		        	<ul>
+		        		<li class="entypo-icon" title="&oplus;">plattformunabhängig</li>
+		        		<li class="entypo-icon" title="&oplus;">schnelle Updates</li>
+		        		<li class="entypo-icon" title="&oplus;">nur ein Entwicklungsstrang</li>
+		        		<li class="entypo-icon" title="&oplus;">keine Abhängikeit von Stores</li>
+		        	</ul>
+		        </div>
+		        	        
+		    </div>
+		    
+			
+			<div id="wasistmobil" class="step slide" data-x="2000" data-y="0" data-scale="1" data-rotate="180">
+		        <h1>Mobil oder Desktop*</h1>
+		        <p>Was definieren Sie als "Mobil" und was als "Desktop"?</p>
+		        <p>&nbsp;</p>
+		        <img src="media/downloads/motiv_mobildesktop.png" width="600" />
+		    </div>
+		    
+		    <!--
+		    <div class="step slide" data-x="3500" data-y="2000" data-scale="8" data-rotate="180">
+		        <h1>5</h1>
+		        <p>Lorem ipsum</p>
+		    </div>
+			-->
 			
 		</div>
 		<!-- Impress - ENDE -->

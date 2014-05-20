@@ -3,7 +3,7 @@
  */
 
 HTML, BODY{
-	height:100%
+	height:100%,
 }
 
 BODY{
@@ -15,6 +15,8 @@ BODY{
 	background: -ms-radial-gradient(center, ellipse cover,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
 	background: radial-gradient(ellipse at center,  #eeeeee 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	
+	font-family: 'Oswald', sans-serif;
 }
 
 /*
@@ -31,6 +33,10 @@ BODY{
 	}	
 }
 
+.navbar-wrapper .navbar-inverse{
+	background:rgba(0,0,0,0.7);
+	border: none;
+}
 
 /*
  * Impress JS
@@ -38,3 +44,89 @@ BODY{
 #impress{
 	height:100%
 }
+
+
+/*
+ * Slides
+ */
+
+DIV.slide{
+	opacity:0.2;
+	-webkit-transition:opacity 2000ms ease-out;
+	-moz-transition:opacity 2000ms ease-out;
+	-o-transition:opacity 2000ms ease-out;
+	transition:opacity 2000ms ease-out;
+}
+
+DIV.slide.active{
+	opacity:1.0;
+	-webkit-transition:opacity 2000ms ease-out;
+	-moz-transition:opacity 2000ms ease-out;
+	-o-transition:opacity 2000ms ease-out;
+	transition:opacity 2000ms ease-out;
+}
+
+
+/* --- difference --- */
+#thedifference{
+	width:600px;
+}
+
+#thedifference H1{
+	font-weight:bold;
+	font-size:50px;
+}
+
+#thedifference P{
+	font-size:24px;
+	font-weight:lighter
+}
+
+#thedifference IMG.imageLeft{float:left}
+#thedifference IMG.imageRight{float:right}
+
+#thedifference SPAN.middle{float:left; display:inline-block;}
+
+/* --- thedifference_detail --- */
+
+#thedifference_detail{
+	width:400px;
+}
+
+#thedifference_detail H1{
+	font-size:60px;
+}
+
+#thedifference_detail P{
+	font-size:24px;
+	font-weight:lighter
+}
+
+/* --- vorundnachteile --- */
+#vorundnachteile{
+	width:750px;
+}
+
+#vorundnachteile .left{float:left}
+#vorundnachteile .right{float:right}
+
+#vorundnachteile H1{
+	font-size:60px;
+}
+	
+#vorundnachteile UL{
+	font-size:24px;
+	font-weight:lighter;
+}
+
+#vorundnachteile UL LI{
+	list-style-type:none;	
+}
+
+
+
+
+
+
+
+
