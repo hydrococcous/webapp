@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width; initial-scale=1"/>
+		<title>Präsentation WebApp</title>
+		
+		<!-- Bootstrap einbinden -->
+		<link href="bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+		
+		<!-- HTML5 Shim und Respond.js einbinden -->
+		<!-- HTML5 und Responive-Unterstützung für Internetexplorer kleiner als IE9 -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      	<![endif]-->
+      	
+      	<!-- Custom StyleSheet -->
+      	<link href="css/fonts.css" rel="stylesheet" />
+      	<link href="css/custom.css" rel="stylesheet" />
+      	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		
+		<div class="jumbotron">
+			<div class="container">
+			<p>
+				<button type="button" class="btn btn-lg btn-danger" value="connect" style="width: 100%; font-size: 200%" id="connect">Connect</button>
+			</p>
+			<p>
+				<button type="button" class="btn btn-lg btn-success" value="next" style="width: 100%; font-size: 200%" id="next">Weiter</button>
+			</p>
+			<p>
+				<button type="button" class="btn btn-lg btn-warning" value="prev" style="width: 100%; font-size: 200%" id="prev">Zurück</button>
+			</p>
+		</div>
+		</div>
+		
+		
+		<div id="impress" style="display:none">&nbsp;</div>
+		
+		<!-- jQuery einbinden -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
+		<!-- ImpressJS -->
+		<script src="impress/impress.js"></script>
+		<script>impress().init();</script>
+		<!-- Eigene Scripte -->
+		<script src="js/function.js"></script>
+
+	</body>
+</html>

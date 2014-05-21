@@ -6,7 +6,7 @@ HTML, BODY{
 	height:100%,
 }
 
-BODY{
+BODY.index{
 	background: #ffffff; /* Old browsers */
 	background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #cccccc 100%); /* FF3.6+ */
 	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
@@ -15,7 +15,9 @@ BODY{
 	background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#cccccc 100%); /* IE10+ */
 	background: radial-gradient(ellipse at center,  #ffffff 0%,#cccccc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-	
+}
+
+BODY{
 	font-family: 'Oswald', sans-serif;
 }
 
@@ -30,6 +32,10 @@ BODY{
 		right:0;
 		left:0;
 		z-index: 20;
+	}
+	
+	.margTop{
+		margin-top:90px;
 	}	
 }
 
@@ -119,6 +125,13 @@ DIV.slide A:hover SPAN{
 	width:600px;
 }
 
+/*
+ * Controller
+ */
+
+.controller INPUT{
+	font-size:40px;
+}
 
 
 

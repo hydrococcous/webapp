@@ -21,7 +21,7 @@
       	<link href="css/custom.css" rel="stylesheet" />
       	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	</head>
-	<body>
+	<body class="index">
 		
 		<div class="navbar-wrapper">
 			<div class="container">
@@ -38,11 +38,15 @@
 						<a href="/webapp" class="navbar-brand">Einleitung</a>
 					</div>
 					<div class="navbar-collapse collapse">
-						<ul class="nav navbar-nav">
-							<li><a href="#">HTML5</a></li>
-							<li><a href="#">Techniken</a></li>
-							<li><a href="#">Barrierefreiheit</a></li>
+						<ul class="nav navbar-nav navbar-left">
+							<li><a href="moeglichkeiten.html">Möglichkeiten</a></li>
+							<li><a href="#">Link</a></li>
+							<li><a href="#">Link</a></li>
 						</ul>
+						<form class="navbar-form navbar-right">
+							<div class="form-group"></div>
+							<button class="btn btn-default" id="connect">Connect</button>
+						</form>
 					</div>
 				</div>
 			</nav>
@@ -107,7 +111,7 @@
 		    
 		    <div id="waskannwebapp" class="step slide" data-x="-3000" data-y="-2500" data-z="-7500" data-rotate="0">
 		        <h1>WebApplication*</h1>
-		        <p><a href="#">Fast alles ist möglich! </a><span class="lsf-icon" title="&raquo;"></span></p>
+		        <p>Was ist möglich?</p>
 		        <img src="http://web-dat.de/uploads/pics/what-is-a-webapp_02.png" />
 		    </div>
 			
@@ -122,5 +126,8 @@
 		<!-- ImpressJS -->
 		<script src="impress/impress.js"></script>
 		<script>impress().init();</script>
+		<!-- Eigene Scripte -->
+		<script src="js/function.js"></script>
+
 	</body>
 </html>
