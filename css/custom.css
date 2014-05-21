@@ -82,6 +82,9 @@ DIV.slide LI{
 	font-weight:lighter;
 }
 
+DIV.slide A:hover SPAN{
+	text-decoration:none
+}
 
 /* --- difference --- */
 #thedifference{
