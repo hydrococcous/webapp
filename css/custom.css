@@ -3,7 +3,7 @@
  */
 
 HTML, BODY{
-	height:100%,
+	height:100%;
 }
 
 BODY.index{
@@ -133,6 +133,67 @@ DIV.slide A:hover SPAN{
 	font-size:40px;
 }
 
+/*
+ * Content
+ */
+
+.jumbotron{
+	background:transparent;
+	border: 1px solid #666;
+}
+
+DIV.row A:after{
+	content:' \00BB'
+}
+
+DIV.row P{
+	font-weight:lighter;
+}
+
+H1{
+	text-shadow: 1px 5px 10px #666;
+}
+
+/*
+ * Calendar
+ */
+
+DIV.month DIV.week DIV:nth-child(6) H2,
+DIV.month DIV.week DIV:nth-child(7) H2{
+	color:#999
+}
+
+DIV.empty{display:none}
+	 
+@media (min-width:768px){
+	 DIV.empty{display:block}
+	 DIV.month DIV.week DIV{
+		border-right: 1px solid #999;
+		border-bottom: 1px solid #999;
+	}
+	DIV.month DIV.week:last-child DIV{
+		border-bottom:none;
+	}
+}
+
+DIV.month DIV.week DIV{
+	border-bottom: 1px solid #999;
+}
+
+DIV.month DIV.week DIV:hover{
+	background:#ccc;
+	cursor:pointer;
+}
+
+DIV.month DIV.week{
+	padding-left:15px;
+	padding-right:15px;
+	
+}
+
+DIV.month DIV.week DIV:nth-child(7){
+	border-right:none;
+}
 
 
 
