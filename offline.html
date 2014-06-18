@@ -282,28 +282,48 @@
 				window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 				
 				// Datenbank anlegen
-				var request = indexedDB.open('html5',2);
-				var item ={title:'Web Storage'};
-				var trans = db.transaction(['features'],'readwrite');
-				
-				request.error = function(){
-					console.log('Es ist ein Fehler aufgetreten');
-				};
-				
-				request.onupgradeneeded = function(){
-					console.log('Datenbank angelegt/upgraded');
-					var db = this.result;
-					if(!db.objectStoreNames.contains('features')){
-						store = db.createObjectStore('features', {
-							keyPath: 'key',
-							autoIncrement: true
-						});
-					}
-				};
-				
-				request.onsuccess  = function(){
-					console.log('Datenbank geöffnet');
-				};
+				if(!window.indexedDB){
+					window.alert('Ihr Browser unterstützt kein IndexedDB');
+				} else {
+					
+					const termine = [
+						{user: "SB", termin: "Testtermin SB", datum: "17.06.2014" },
+						{user: "FB", termin: "Testtermin FB", datum: "16.06.2014" }
+					];
+					
+					var db;
+					var request;
+					var objectStore;
+					
+					// Datenbank öffnen
+					request = window.indexedDB.open("TermineOffline",6);
+					
+					// Fehler-Event
+					request.onerror = function(evt){
+						console.log("Es ist ein Fehler aufgetreten");
+					};
+					
+					// Erfolgs-Event
+					request.onsuccess = function(evt){
+						//db = request.result;
+					};
+					
+					// Änderungs-Event
+					request.onupgradeneeded = function(evt){
+						
+						console.log(evt.target.result);
+						
+						db = evt.target.result;
+						objectStore = db.createObjectStore("OfflineTermine", {keyPath: "user"});
+						objectStore.createIndex("termin","termin",{unique: false});
+						objectStore.createIndex("datum","datum",{unique: false});
+						
+						for(var i in termine){
+							objectStore.add(termine[i]);
+						}
+					};
+					
+				}
 				
 			});
 		</script>
