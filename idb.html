@@ -1,43 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-
-		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-		Remove this if you use the .htaccess -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-		<title>idb</title>
-		<meta name="description" content="">
-		<meta name="author" content="birke">
-
-		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico">
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-	</head>
-
-	<body id="bodyElement">
-		<h1>IndexedDB</h1>
-		
-		<script type="text/javascript">
-		
-		// http://www.codeproject.com/Articles/325135/Getting-Started-with-IndexedDB
-			
-		var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
-			
-		var db;
-		var request = indexedDB.open("TestDatenbank");
-		request.onerror = function(e){
-			console.log("Fehler: " + e.target.errorCode);
-		};
-		
-		request.onsuccess = function(e){
-			db = request.result;
-			console.log(db);
-		};
-		
-		
-		</script>
-		
-	</body>
+<head>
+    <meta charset="utf-8" />
+    <title>IndexedDB</title>
+    <script type="text/javascript">
+    
+        var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
+        var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+        var db;
+        
+        (function () {     
+            var peopleData = [
+                { name: "John Dow", email: "john@company.com" },
+                { name: "Don Dow", email: "don@company.com" }
+            ];
+ 
+            function initDb() {
+                var request = indexedDB.open("PeopleDB",2);  
+                request.onsuccess = function (evt) {
+                    db = request.result;   
+                    console.log(db);                                                         
+                };
+ 
+                request.onerror = function (evt) {
+                    console.log("IndexedDB error: " + evt.target.errorCode);
+                };
+ 
+                request.onupgradeneeded = function (evt) {                   
+                    var objectStore = evt.currentTarget.result.createObjectStore(
+                             "people", { keyPath: "id", autoIncrement: true });
+ 
+                    objectStore.createIndex("name", "name", { unique: false });
+                    objectStore.createIndex("email", "email", { unique: true });
+ 
+                    for (i in peopleData) {
+                       // objectStore.add(peopleData[i]);
+                    }
+                };
+            }
+ 
+            function contentLoaded() {
+                initDb();                
+                var btnAdd = document.getElementById("btnAdd");
+                var btnDelete = document.getElementById("btnDelete");
+                var btnPrint = document.getElementById("btnPrint");                
+ 
+                btnAdd.addEventListener("click", function () {
+                    var name = document.getElementById("txtName").value;
+                    var email = document.getElementById("txtEmail").value;
+ 
+                    var transaction = db.transaction("people", "readwrite");
+                    var objectStore = transaction.objectStore("people");                    
+                    var request = objectStore.add({ name: name, email: email });
+                    request.onsuccess = function (evt) {
+                        // do something after the add succeeded
+                        console.log(evt);
+                    };
+                }, false);
+ 
+                btnDelete.addEventListener("click", function () {
+                    var id = document.getElementById("txtID").value;
+ 
+                    var transaction = db.transaction("people", "readwrite");
+                    var objectStore = transaction.objectStore("people");
+                    var request = objectStore.delete(+id);
+                    request.onsuccess = function(evt) {  
+                        console.log(id); 
+                    };
+                }, false);
+ 
+                btnPrint.addEventListener("click", function () {
+                    var output = document.getElementById("printOutput");
+                    output.textContent = "";
+ 
+                    var transaction = db.transaction("people", "readwrite");
+                    var objectStore = transaction.objectStore("people");
+ 
+                    var request = objectStore.openCursor();
+                    request.onsuccess = function(evt) {  
+                        var cursor = evt.target.result;  
+                        if (cursor) {  
+                            output.textContent += "id: " + cursor.key + 
+                                        " is " + cursor.value.name + " ";                            
+                            cursor.continue();  
+                        }  
+                        else {  
+                            console.log("No more entries!");  
+                        }  
+                    };  
+                }, false);              
+            }
+ 
+            window.addEventListener("DOMContentLoaded", contentLoaded, false); 
+    })();       
+    </script>
+</head>
+<body>
+    <div id="container">
+        <label for="txtName">
+            Name:
+        </label>
+        <input type="text" id="txtName" name="txtName" />
+        <br />
+        <label for="txtEmail">
+            Email:
+        </label>
+        <input type="email" id="txtEmail" name="txtEmail" />
+        <br />
+        <input type="button" id="btnAdd" value="Add Record" />
+        <br />
+        <label for="txtID">
+            ID:
+        </label>
+        <input type="text" id="txtID" name="txtID" />
+        <br />
+        <input type="button" id="btnDelete" value="Delete Record" />
+        <br />
+        <input type="button" id="btnPrint" value="Print objectStore" />
+        <br />
+        <output id="printOutput">
+        </output>
+    </div>
+</body>
 </html>
