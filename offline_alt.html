@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" manifest="offline.appcache">
+<html lang="de">
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -30,7 +30,7 @@
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-							<span class="sr-only">Navigation</span>	
+							<span class="sr-only">Navigation</span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -262,14 +262,13 @@
 		
 		
 		<!-- jQuery einbinden -->
-		<script src="js/jquery/1.11.0/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<!-- Bootstrap -->
 		<script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
 		<!-- Eigene Scripte -->
 		<script src="js/function.js"></script>
 		
 		<script>
-		/*
 			$(document).ready(function(){
 				
 				$('DIV.week DIV').click(function(){
@@ -300,8 +299,9 @@
 					//monat = time;
 				}
 				
-				// Datenbank - indexedDB
-					
+				/*
+				 * Datenbank - indexedDB
+				 */				
 				// variablen definieren
 				// ggf. sollte mittels Modernizr geprüft werden
 				// ob indexedDB unterstützt wird. (polyfill für Safari-Mobil)
@@ -505,38 +505,6 @@
 				}
 				
 				
-				
-			});
-			*/
-			
-			$(document).ready(function(){
-				
-				// Netzwerk-verbindung prüfen
-				function checkNetwork(){
-					var network = navigator.onLine;
-					console.log(network);
-					}
-					
-				checkNetwork();
-				
-				// Modal-Box öffnen
-				$('DIV.week DIV').click(function(){
-					$('#myModal').modal();
-					
-					var timestamp = $(this).attr('id');
-					$('#timestamp').val(timestamp);
-					
-					var currDate = new Date(timestamp*1000);
-					
-					var tag = currDate.getDate();
-					if(tag < 10){tag = '0'+tag}
-					
-					var monat = currDate.getMonth();
-					monat = (monat*1)+1;
-					if(monat < 10){monat = '0'+monat}
-					
-					$('#headdate').html(tag+'.'+monat+'.'+currDate.getFullYear());
-					});
 				
 			});
 		</script>

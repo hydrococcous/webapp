@@ -178,12 +178,24 @@ DIV.empty{display:none}
 
 DIV.month DIV.week DIV{
 	border-bottom: 1px solid #999;
+	border-top: 1px solid transparent;
 }
 
 DIV.month DIV.week DIV:hover{
 	background:#ccc;
 	cursor:pointer;
 }
+
+DIV.month DIV.week DIV.eintragLocal{
+	background:#ff00ff;
+	cursor:pointer;
+}
+
+DIV.month DIV.week DIV.eintragGlobal{
+	background:#00ff00;
+	cursor:pointer;
+}
+
 
 DIV.month DIV.week{
 	padding-left:15px;
@@ -195,5 +207,12 @@ DIV.month DIV.week DIV:nth-child(7){
 	border-right:none;
 }
 
+LABEL{
+	display:block
+}
+
+TEXTAREA{
+	width:100%
+}
 
 

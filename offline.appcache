@@ -1,0 +1,12 @@
+CACHE MANIFEST
+# 14.07.2014:v4
+
+CACHE:
+# Lokale Dateien
+offline.html
+bootstrap-3.1.1/css/bootstrap.min.css
+css/fonts.css
+css/custom.css
+bootstrap-3.1.1/js/bootstrap.min.js
+js/function.js
+js/jquery/1.11.0/jquery.min.js
