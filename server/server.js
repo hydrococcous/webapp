@@ -10,7 +10,7 @@ var ClientAnzahl = 0;
 
 // Websocket Server
 var WebSocketServer = require('ws').Server;
-var wss = new WebSocketServer({host: '192.168.2.153', port: 8000});
+var wss = new WebSocketServer({host: '192.168.178.30', port: 8000});
 
 wss.on('connection', function(ws){
 	

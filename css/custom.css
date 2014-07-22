@@ -215,4 +215,11 @@ TEXTAREA{
 	width:100%
 }
 
+/* Notizen */
+P.notice{
+cursor:pointer
+}
+P.notice:hover{
+text-decoration:underline
+}
 

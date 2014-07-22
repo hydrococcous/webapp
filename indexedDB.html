@@ -57,14 +57,33 @@
 		<div class="container">
 		
 			<div class="jumbotron margTop">
-	        	<h1>indexedDB*</h1>
-	        	<p>Clientseitige Datenbanken / offline</p>
-	        </div>	
-	        
-	       <div class="row">
-		   
-		   </div>
+				<h1>indexedDB*</h1>
+				<p>Clientseitige Datenbanken / offline</p>
+			</div>	
+			
+			<div class="row">
+			
+				<div class="container">
+					<form id="noticeform">
+						<div class="form-group">
+							<label>Titel:</label>
+							<input type="text" class="form-control" id="title" />
+						</div>
+						<div class="form-group">
+							<label>Eintrag:</label>
+							<textarea class="form-control" id="notice" rows="5"></textarea>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-default" id="newentry">Neuer Eintrag</button>
+						</div>
+						<hr />
+					</form>
+				</div>
 				
+				<div class="container" id="noticeContainer"></div>
+			
+			</div>
+		
 		</div>
 		
 		
@@ -76,37 +95,7 @@
 		<script src="js/function.js"></script>
 		
 		<script>
-		/*
 			$(document).ready(function(){
-				
-				$('DIV.week DIV').click(function(){
-					$('#myModal').modal();
-					
-					var timestamp = $(this).attr('id');
-					$('#timestamp').val(timestamp);
-					
-					var currDate = new Date(timestamp*1000);
-					
-					var tag = currDate.getDate();
-					if(tag < 10){tag = '0'+tag}
-					
-					var monat = currDate.getMonth();
-					monat = (monat*1)+1;
-					if(monat < 10){monat = '0'+monat}
-					
-					$('#headdate').html(tag+'.'+monat+'.'+currDate.getFullYear());
-
-					var currID = $(this).attr('id');
-					printLocalData(true,currID);
-					
-				});
-				
-				function makeDate(tstamp){
-					//time = tstamp*1000;
-					//tag = time.getDate();
-					//monat = time;
-				}
-				*/
 				
 				
 				// Datenbank - indexedDB
@@ -120,12 +109,11 @@
 			    var dbname = "DBNotice";
 			    var objectStoreName = "notices";
 			    var dbversion = 1;
-			    var datum;
-			    var eintrag;
+			    var notice, title;
 			    var transactionDB;
 			    var objectStore;
 			    var request;
-			    var termineData = [];
+			    var noticeData = [];
 			    
 				
 				
@@ -133,7 +121,8 @@
 		        function initialisiereDB(){
 		        	request = indexedDB.open(dbname, dbversion);  
 	                request.onsuccess = function (evt) {
-	                    db = request.result;                                                        
+	                    db = request.result;  
+						printLocalData();                                                      
 	                };
 	 
 	                request.onerror = function (evt) {
@@ -141,45 +130,48 @@
 	                };
 	 
 	                request.onupgradeneeded = function (evt) {      
-					
-						$('#myModal').modal();
-					             
+        				console.log("IndexedDb wurde angelegt bzw aktualisiert");
+						console.log(evt);
 		                var objectStore = evt.currentTarget.result.createObjectStore(objectStoreName, { keyPath: "id", autoIncrement: true });
 		 				
-		 				objectStore.createIndex("timestamp", "timestamp", { unique: false });
-		            	objectStore.createIndex("eintrag", "eintrag", { unique: false });
+		 				objectStore.createIndex("title", "title", { unique: false });
+		            	objectStore.createIndex("notice", "notice", { unique: false });
 			        };
 			        
 			    }
 				
 				initialisiereDB();
-				
-				/*
+
 				// Neuen Eintrag lokal speichern
-				$('#speichern').on('click', function(){
+				$('#newentry').on('click', function(e){
 					
-					timestamp = $('#timestamp').val();
-					uhrzeitvon = $('#uhrzeitvon').val();
-					uhrzeitbis = $('#uhrzeitbis').val();
-					eintrag = $('#eintrag').val();
-					userid = $('#userid').val();
+					e.preventDefault();
+					
+					title = $('#title').val();
+					notice = $('#notice').val();
 					
 					transactionDB = db.transaction(objectStoreName, "readwrite");
-			        objectStore = transactionDB.objectStore(objectStoreName);                    
-			        request = objectStore.add({ timestamp: timestamp, uhrzeitvon: uhrzeitvon, uhrzeitbis: uhrzeitbis, eintrag: eintrag, userid: userid });
+			        objectStore = transactionDB.objectStore(objectStoreName); 
+					if(title.length > 0 && notice.length > 0){                  
+						request = objectStore.add({ title: title, notice: notice});
+						} else {
+							console.log("Es wurde keine Eintrag in die DB geschrieben");
+						}
 			        request.onsuccess = function (evt) {
 			            // do something after the add succeeded
+						$("input[type=text], textarea").val("");
 			            console.log(evt);
-			            $('#myModal').modal('hide')
-			           printLocalData(false, false);
+						printLocalData();
 			        };
+					request.onerror = function(evt){
+						console.log("Fehler beim speichern der Daten");
+					}
 			        
 				});
 				
-				
-				// lokale Daten in Kalender anzeigen
-				function printLocalData(viewAll,id){
-					$('#bestehendeTermine').html('');
+				// lokale Daten anzeigen
+				function printLocalData(){
+					$('#noticeContainer').html('');
 					transactionDB = db.transaction(objectStoreName, "readwrite");
 					objectStore = transactionDB.objectStore(objectStoreName);
 					
@@ -187,21 +179,19 @@
 					request.onsuccess = function(evt){
 						cursor = evt.target.result;
 						if(cursor){
-							//console.log(cursor.value.timestamp);
-							if(!viewAll){
-								$('#'+cursor.value.timestamp).addClass('eintragLocal');
-							}
-							else if(viewAll && (cursor.value.timestamp == id)){
-								$('#bestehendeTermine').append('<p>'+cursor.value.uhrzeitvon+' bis '+cursor.value.uhrzeitbis+' <br />'+cursor.value.eintrag+'</p>');
-							}
+							console.log("Daten wurden lokal in der DB abgelegt."+cursor.value);
+							$('#noticeContainer').append('<p id="'+cursor.value.id+'" class="notice"><strong>'+cursor.value.title+': </strong> '+cursor.value.notice+'</p>');
 							cursor.continue();
 						}
 						
 					};
-					request.onerror = function(){
-						console.log('fehler');
+					request.onerror = function(evt){
+						console.log('Es ist ein Fehler beim eintrag in die lokale DB aufgetreten: ' + evt);
 					};
 				}
+				
+				/*
+
 				
 				// Daten mit Server synchronisieren
 				$('#synchronisieren').on('click', function(){
@@ -318,16 +308,18 @@
 				
 			});
 			*/
-			
-			$(document).ready(function(){
 				
 				// Netzwerk-verbindung prüfen
 				function checkNetwork(){
 					var network = navigator.onLine;
-					console.log(network);
+					console.log("online Status: " + network);
 					}
 					
 				checkNetwork();
+				
+				$(document).on('click', ".notice", function(){
+					$("#myModal").modal();
+				});
 				
 			});
 		</script>
@@ -338,28 +330,16 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Neuen Termin eintragen für den:  <span id="headdate"></span></h4>
+						<h4 class="modal-title" id="myModalLabel">Was möchten Sie mit dem Eintrag tun?<span id="headdate"></span></h4>
 					</div>
 					<div class="modal-body">
 					
-					<label>Uhrzeit:</label>	
-					<input type="time" id="uhrzeitvon" />
-					&nbsp;bis&nbsp;
-					<input type="time" id="uhrzeitbis" />
-					
-					<label>Eintrag:</label>
-					<textarea rows="5" id="eintrag"></textarea>
-					
-					<input type="hidden" id="userid" value="123" />
-					<input type="hidden" id="timestamp" value="" />
-						
-						<h4>Bestehende Termine</h4>
-						<div id="bestehendeTermine"></div>
-						
+						<button type="button" id="delete" class="btn btn-default">Eintrag löschen</button>
+						<button type="button" id="push" class="btn btn-default">Eintrag veröffentlichen</button>
+
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-						<button type="button" class="btn btn-primary" id="speichern">Speichern</button>
+						
 					</div>
 				</div>
 			</div>
