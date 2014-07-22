@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<!--<meta name="viewport" content="width=device-width; initial-scale=1"/>-->
+		<title>Präsentation WebApp</title>
+		
+		<!-- Bootstrap einbinden -->
+		<link href="bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+		
+		<!-- HTML5 Shim und Respond.js einbinden -->
+		<!-- HTML5 und Responive-Unterstützung für Internetexplorer kleiner als IE9 -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      	<![endif]-->
+      	
+      	<!-- Custom StyleSheet -->
+      	<link href="css/fonts.css" rel="stylesheet" />
+      	<link href="css/custom.css" rel="stylesheet" />
+      	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	</head>
+	<body class="index">
+		
+		<div class="navbar-wrapper">
+			<div class="container">
+			<!-- Navigation - START -->
+			<nav class="navbar navbar-inverse" role="navigation">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Navigation</span>	
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="/webapp" class="navbar-brand">Einleitung</a>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-left">
+							<li><a href="moeglichkeiten.html">Möglichkeiten</a></li>
+							<li><a href="#">Link</a></li>
+							<li><a href="#">Link</a></li>
+						</ul>
+						<form class="navbar-form navbar-right">
+							<div class="form-group"></div>
+							<button class="btn btn-default" id="connect">Connect</button>
+						</form>
+					</div>
+				</div>
+			</nav>
+			<!-- Navigation - ENDE -->
+		</div>
+		</div>
+		
+		<div class="container">
+		
+			<div class="jumbotron margTop">
+	        	<h1>indexedDB*</h1>
+	        	<p>Clientseitige Datenbanken / offline</p>
+	        </div>	
+	        
+	       <div class="row">
+		   
+		   </div>
+				
+		</div>
+		
+		
+		<!-- jQuery einbinden -->
+		<script src="js/jquery/1.11.0/jquery.min.js"></script>
+		<!-- Bootstrap -->
+		<script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
+		<!-- Eigene Scripte -->
+		<script src="js/function.js"></script>
+		
+		<script>
+		/*
+			$(document).ready(function(){
+				
+				$('DIV.week DIV').click(function(){
+					$('#myModal').modal();
+					
+					var timestamp = $(this).attr('id');
+					$('#timestamp').val(timestamp);
+					
+					var currDate = new Date(timestamp*1000);
+					
+					var tag = currDate.getDate();
+					if(tag < 10){tag = '0'+tag}
+					
+					var monat = currDate.getMonth();
+					monat = (monat*1)+1;
+					if(monat < 10){monat = '0'+monat}
+					
+					$('#headdate').html(tag+'.'+monat+'.'+currDate.getFullYear());
+
+					var currID = $(this).attr('id');
+					printLocalData(true,currID);
+					
+				});
+				
+				function makeDate(tstamp){
+					//time = tstamp*1000;
+					//tag = time.getDate();
+					//monat = time;
+				}
+				*/
+				
+				
+				// Datenbank - indexedDB
+					
+				// variablen definieren
+				// ggf. sollte mittels Modernizr geprüft werden
+				// ob indexedDB unterstützt wird. (polyfill für Safari-Mobil)
+				var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
+			    var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+			    var db;
+			    var dbname = "DBNotice";
+			    var objectStoreName = "notices";
+			    var dbversion = 1;
+			    var datum;
+			    var eintrag;
+			    var transactionDB;
+			    var objectStore;
+			    var request;
+			    var termineData = [];
+			    
+				
+				
+			    // Datenbank initialisieren/öffnen
+		        function initialisiereDB(){
+		        	request = indexedDB.open(dbname, dbversion);  
+	                request.onsuccess = function (evt) {
+	                    db = request.result;                                                        
+	                };
+	 
+	                request.onerror = function (evt) {
+	                    console.log("IndexedDB Fehler: " + evt.target.errorCode);
+	                };
+	 
+	                request.onupgradeneeded = function (evt) {      
+					
+						$('#myModal').modal();
+					             
+		                var objectStore = evt.currentTarget.result.createObjectStore(objectStoreName, { keyPath: "id", autoIncrement: true });
+		 				
+		 				objectStore.createIndex("timestamp", "timestamp", { unique: false });
+		            	objectStore.createIndex("eintrag", "eintrag", { unique: false });
+			        };
+			        
+			    }
+				
+				initialisiereDB();
+				
+				/*
+				// Neuen Eintrag lokal speichern
+				$('#speichern').on('click', function(){
+					
+					timestamp = $('#timestamp').val();
+					uhrzeitvon = $('#uhrzeitvon').val();
+					uhrzeitbis = $('#uhrzeitbis').val();
+					eintrag = $('#eintrag').val();
+					userid = $('#userid').val();
+					
+					transactionDB = db.transaction(objectStoreName, "readwrite");
+			        objectStore = transactionDB.objectStore(objectStoreName);                    
+			        request = objectStore.add({ timestamp: timestamp, uhrzeitvon: uhrzeitvon, uhrzeitbis: uhrzeitbis, eintrag: eintrag, userid: userid });
+			        request.onsuccess = function (evt) {
+			            // do something after the add succeeded
+			            console.log(evt);
+			            $('#myModal').modal('hide')
+			           printLocalData(false, false);
+			        };
+			        
+				});
+				
+				
+				// lokale Daten in Kalender anzeigen
+				function printLocalData(viewAll,id){
+					$('#bestehendeTermine').html('');
+					transactionDB = db.transaction(objectStoreName, "readwrite");
+					objectStore = transactionDB.objectStore(objectStoreName);
+					
+					request = objectStore.openCursor();
+					request.onsuccess = function(evt){
+						cursor = evt.target.result;
+						if(cursor){
+							//console.log(cursor.value.timestamp);
+							if(!viewAll){
+								$('#'+cursor.value.timestamp).addClass('eintragLocal');
+							}
+							else if(viewAll && (cursor.value.timestamp == id)){
+								$('#bestehendeTermine').append('<p>'+cursor.value.uhrzeitvon+' bis '+cursor.value.uhrzeitbis+' <br />'+cursor.value.eintrag+'</p>');
+							}
+							cursor.continue();
+						}
+						
+					};
+					request.onerror = function(){
+						console.log('fehler');
+					};
+				}
+				
+				// Daten mit Server synchronisieren
+				$('#synchronisieren').on('click', function(){
+					termineData = [];
+					transactionDB = db.transaction(objectStoreName, "readwrite");
+					objectStore = transactionDB.objectStore(objectStoreName); 
+					request = objectStore.openCursor();
+					request.onsuccess = function(evt){
+						var cursor = evt.target.result;
+						if(cursor){
+							termineData.push({
+								timestamp: cursor.value.timestamp,
+								uhrzeitvon: cursor.value.uhrzeitvon,
+								uhrzeitbis: cursor.value.uhrzeitbis,
+								userid: cursor.value.userid,
+								eintrag: escape(cursor.value.eintrag)
+							});
+							
+							cursor.continue();
+						} else {
+							writeToDB(termineData);
+							
+						}
+					}
+				});
+				
+				
+				// Daten per AJAX in Datenbank schreiben
+				function writeToDB(jsonObj){
+					$.ajax({
+						type: 'POST',
+						url: 'idbToMySQL.php',
+						data: {termine: JSON.stringify(jsonObj)},
+						dataType: 'json',
+						async: false,
+						success: function(data){
+							deleteLocalData();
+						},
+						error: function(xhr, status, errorThrown){
+							console.log(status);
+							console.log(errorThrown);
+						}
+					});
+				}
+				
+				// entfernte Daten auslesen
+				function readFromDB(){
+					$.ajax({
+						type: 'POST',
+						url: 'mysqlToIDB.php',
+						async: true,
+						success: function(data){
+							var dbItemsJSON = $.parseJSON(data);
+							for(var i = 0; i < dbItemsJSON.termine.length; i++){
+							
+								$('#'+dbItemsJSON.termine[i].timestamp).addClass('eintragGlobal');
+								
+								writeToLocalDB(dbItemsJSON.termine[i].timestamp,
+											   dbItemsJSON.termine[i].userid,
+											   dbItemsJSON.termine[i].uhrzeitvon,
+											   dbItemsJSON.termine[i].uhrzeitbis,
+											   dbItemsJSON.termine[i].eintrag);
+							}
+							
+						},
+						error: function(xhr, status, errorThrown){
+							console.log(status);
+							console.log(errorThrown);
+						}
+					});	
+				}
+				
+				// Daten lokal speichern
+				function writeToLocalDB(ts,uid,von,bis,etrg){
+					transactionDB = db.transaction(objectStoreName, "readwrite");
+					objectStore = transactionDB.objectStore(objectStoreName);
+					
+					request = objectStore.add({ timestamp: ts, uhrzeitvon: von, uhrzeitbis: bis, eintrag: etrg, userid: uid });
+					request.onsuccess = function(evt){
+						console.log('daten lokal geschrieben');
+					};
+					request.onerror = function(){
+						console.log('fehler beim schreiben der daten auf Lokal');
+					};
+					
+				}
+				
+				// lokale Daten löschen
+				function deleteLocalData(){
+					transactionDB = db.transaction(objectStoreName, "readwrite");
+					objectStore = transactionDB.objectStore(objectStoreName);
+					
+					request = objectStore.openCursor();
+					request.onsuccess = function(evt){
+						cursor = evt.target.result;
+						if(cursor){
+							console.log('ID: ' + cursor.key);
+							var deleteItems = objectStore.delete(cursor.key,objectStoreName);
+							deleteItems.onsuccess = function(evt){
+								console.log('lokaler Datensatz gelöscht');
+							};
+							deleteItems.onerror = function(){
+								console.log('konnte datenstaz nicht löschen');
+							}
+							cursor.continue();
+						} else {
+							console.log('keine Einträge mehr');
+							//location.reload();
+						}
+					}
+				}
+				
+				
+				
+			});
+			*/
+			
+			$(document).ready(function(){
+				
+				// Netzwerk-verbindung prüfen
+				function checkNetwork(){
+					var network = navigator.onLine;
+					console.log(network);
+					}
+					
+				checkNetwork();
+				
+			});
+		</script>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Neuen Termin eintragen für den:  <span id="headdate"></span></h4>
+					</div>
+					<div class="modal-body">
+					
+					<label>Uhrzeit:</label>	
+					<input type="time" id="uhrzeitvon" />
+					&nbsp;bis&nbsp;
+					<input type="time" id="uhrzeitbis" />
+					
+					<label>Eintrag:</label>
+					<textarea rows="5" id="eintrag"></textarea>
+					
+					<input type="hidden" id="userid" value="123" />
+					<input type="hidden" id="timestamp" value="" />
+						
+						<h4>Bestehende Termine</h4>
+						<div id="bestehendeTermine"></div>
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+						<button type="button" class="btn btn-primary" id="speichern">Speichern</button>
+					</div>
+				</div>
+			</div>
+		</div>
+						
+		
+	</body>
+</html>
