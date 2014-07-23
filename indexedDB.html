@@ -190,6 +190,15 @@
 					};
 				}
 				
+				// lokale Daten löschen
+				function deleteLocalItem(noticeitem){
+					transactionDB = db.transaction(objectStoreName, "readwrite");
+					objectStore = transactionDB.objectStore(objectStoreName);
+					objectStore.delete(noticeitem*1,objectStoreName);
+					printLocalData();
+					$("#myModal").modal('hide');
+				}
+				
 				/*
 
 				
@@ -319,14 +328,21 @@
 				
 				$(document).on('click', ".notice", function(){
 					$("#myModal").modal();
+					var myID = $(this).attr("id");
+					$("#noticeid").val(myID);
+				});
+				
+				$("#delete").on('click', function(){
+					var currItem = $("#noticeid").val();
+					deleteLocalItem(currItem);
 				});
 				
 			});
 		</script>
 		
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+		<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog  modal-sm">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -334,8 +350,13 @@
 					</div>
 					<div class="modal-body">
 					
-						<button type="button" id="delete" class="btn btn-default">Eintrag löschen</button>
-						<button type="button" id="push" class="btn btn-default">Eintrag veröffentlichen</button>
+						<div class="form-group">
+							<button type="button" id="delete" class="btn btn-default">Eintrag lokal löschen</button>
+						</div>
+						<div class="form-group">
+							<button type="button" id="push" class="btn btn-default">Eintrag veröffentlichen</button>
+						</div>
+						<input type="hidden" id="noticeid" value="" />
 
 					</div>
 					<div class="modal-footer">

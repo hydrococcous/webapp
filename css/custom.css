@@ -217,7 +217,7 @@ TEXTAREA{
 
 /* Notizen */
 P.notice{
-cursor:pointer
+cursor:pointer;
 }
 P.notice:hover{
 text-decoration:underline
