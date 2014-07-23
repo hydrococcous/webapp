@@ -114,6 +114,7 @@
 			    var objectStore;
 			    var request;
 			    var noticeData = [];
+				var currItem;
 			    
 				
 				
@@ -122,7 +123,8 @@
 		        	request = indexedDB.open(dbname, dbversion);  
 	                request.onsuccess = function (evt) {
 	                    db = request.result;  
-						printLocalData();                                                      
+						printLocalData();  
+						readFromDB();                                                   
 	                };
 	 
 	                request.onerror = function (evt) {
@@ -171,7 +173,7 @@
 				
 				// lokale Daten anzeigen
 				function printLocalData(){
-					$('#noticeContainer').html('');
+					//$('#noticeContainer').html('');
 					transactionDB = db.transaction(objectStoreName, "readwrite");
 					objectStore = transactionDB.objectStore(objectStoreName);
 					
@@ -179,7 +181,6 @@
 					request.onsuccess = function(evt){
 						cursor = evt.target.result;
 						if(cursor){
-							console.log("Daten wurden lokal in der DB abgelegt."+cursor.value);
 							$('#noticeContainer').append('<p id="'+cursor.value.id+'" class="notice"><strong>'+cursor.value.title+': </strong> '+cursor.value.notice+'</p>');
 							cursor.continue();
 						}
@@ -197,32 +198,30 @@
 					objectStore.delete(noticeitem*1,objectStoreName);
 					printLocalData();
 					$("#myModal").modal('hide');
+					$("#"+noticeitem).remove();
 				}
 				
-				/*
-
-				
 				// Daten mit Server synchronisieren
-				$('#synchronisieren').on('click', function(){
-					termineData = [];
+				$('#push').on('click', function(){
+					noticeData = [];
+					currItem = $("#noticeid").val();
 					transactionDB = db.transaction(objectStoreName, "readwrite");
 					objectStore = transactionDB.objectStore(objectStoreName); 
 					request = objectStore.openCursor();
 					request.onsuccess = function(evt){
 						var cursor = evt.target.result;
 						if(cursor){
-							termineData.push({
-								timestamp: cursor.value.timestamp,
-								uhrzeitvon: cursor.value.uhrzeitvon,
-								uhrzeitbis: cursor.value.uhrzeitbis,
-								userid: cursor.value.userid,
-								eintrag: escape(cursor.value.eintrag)
-							});
+							if(cursor.key == currItem*1){
+								noticeData.push({
+									title: cursor.value.title,
+									notice: escape(cursor.value.notice)
+								});
+								deleteLocalItem(currItem*1);
+							}
 							
 							cursor.continue();
 						} else {
-							writeToDB(termineData);
-							
+							writeToDB(noticeData);
 						}
 					}
 				});
@@ -232,12 +231,13 @@
 				function writeToDB(jsonObj){
 					$.ajax({
 						type: 'POST',
-						url: 'idbToMySQL.php',
-						data: {termine: JSON.stringify(jsonObj)},
+						url: 'noticeToDB.php',
+						data: {notice: JSON.stringify(jsonObj)},
 						dataType: 'json',
 						async: false,
 						success: function(data){
-							deleteLocalData();
+							// do something
+							console.log(data);
 						},
 						error: function(xhr, status, errorThrown){
 							console.log(status);
@@ -245,6 +245,28 @@
 						}
 					});
 				}
+				
+				// entfernte Daten auslesen
+				function readFromDB(){
+					$.ajax({
+						type: 'POST',
+						url: 'noticeToDB.php',
+						async: true,
+						success: function(data){
+							var dbItemsJSON = $.parseJSON(data);
+							for(var i = 0; i < dbItemsJSON.notice.length; i++){
+								$('#noticeContainer').append('<p class="publish"><strong>'+dbItemsJSON.notice[i].title+': </strong> '+dbItemsJSON.notice[i].notice+'</p>');
+								}
+							
+							},
+						error: function(xhr, status, errorThrown){
+							console.log(status);
+							console.log(errorThrown);
+							}
+					});	
+				}
+				
+				/*
 				
 				// entfernte Daten auslesen
 				function readFromDB(){
@@ -333,7 +355,7 @@
 				});
 				
 				$("#delete").on('click', function(){
-					var currItem = $("#noticeid").val();
+					currItem = $("#noticeid").val();
 					deleteLocalItem(currItem);
 				});
 				
