@@ -1,12 +1,19 @@
 CACHE MANIFEST
-# 14.07.2014:v4
+# 2014-07-25:v2
 
+# gecachte Dateien
 CACHE:
-# Lokale Dateien
-offline.html
-bootstrap-3.1.1/css/bootstrap.min.css
-css/fonts.css
+indexedDB.html
+
 css/custom.css
+css/fonts.css
+bootstrap-3.1.1/css/bootstrap.min.css
+
+js/jquery/1.11.0/jquery.min.js
 bootstrap-3.1.1/js/bootstrap.min.js
 js/function.js
-js/jquery/1.11.0/jquery.min.js
+
+# entfernet Resourcen
+NETWORK:
+http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext
+*

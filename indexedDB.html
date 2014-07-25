@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" manifest="offline.appcache">
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -64,6 +64,18 @@
 			<div class="row">
 			
 				<div class="container">
+					
+				</div>
+
+			</div>
+		
+		</div>
+		
+		<div class="row">
+			<div class="container">
+			
+				<div class="col-md-4">
+					<h2>Neue Notiz anlegen</h2>
 					<form id="noticeform">
 						<div class="form-group">
 							<label>Titel:</label>
@@ -76,14 +88,22 @@
 						<div class="form-group">
 							<button class="btn btn-default" id="newentry">Neuer Eintrag</button>
 						</div>
-						<hr />
 					</form>
 				</div>
 				
-				<div class="container" id="noticeContainer"></div>
-			
+				<div class="col-md-4" id="localNotice">
+					<h2>Lokale Notizen</h2>
+					<div>
+					</div>
+				</div>
+				
+				<div class="col-md-4" id="publishNotice">
+					<h2>Veröffentlichte Notizen</h2>
+					<div>
+					</div>
+				</div>
+				
 			</div>
-		
 		</div>
 		
 		
@@ -93,13 +113,11 @@
 		<script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
 		<!-- Eigene Scripte -->
 		<script src="js/function.js"></script>
+		<script src="js/applicationCache.js"></script>
 		
 		<script>
 			$(document).ready(function(){
-				
-				
-				// Datenbank - indexedDB
-					
+
 				// variablen definieren
 				// ggf. sollte mittels Modernizr geprüft werden
 				// ob indexedDB unterstützt wird. (polyfill für Safari-Mobil)
@@ -109,14 +127,23 @@
 			    var dbname = "DBNotice";
 			    var objectStoreName = "notices";
 			    var dbversion = 1;
-			    var notice, title;
+			    var notice, title, online;
 			    var transactionDB;
 			    var objectStore;
 			    var request;
 			    var noticeData = [];
 				var currItem;
-			    
 				
+				// Netzwerk-Verbindung prüfen
+				function checkNetwork(){
+					var network = navigator.onLine;
+					console.log("online Status: " + network);
+					return network;
+					}
+					
+				online = checkNetwork();
+			    
+				// Datenbank - indexedDB
 				
 			    // Datenbank initialisieren/öffnen
 		        function initialisiereDB(){
@@ -173,7 +200,7 @@
 				
 				// lokale Daten anzeigen
 				function printLocalData(){
-					//$('#noticeContainer').html('');
+					$('#localNotice DIV').html('');
 					transactionDB = db.transaction(objectStoreName, "readwrite");
 					objectStore = transactionDB.objectStore(objectStoreName);
 					
@@ -181,7 +208,7 @@
 					request.onsuccess = function(evt){
 						cursor = evt.target.result;
 						if(cursor){
-							$('#noticeContainer').append('<p id="'+cursor.value.id+'" class="notice"><strong>'+cursor.value.title+': </strong> '+cursor.value.notice+'</p>');
+							$('#localNotice DIV').append('<p id="'+cursor.value.id+'" class="notice"><strong>'+cursor.value.title+': </strong> '+cursor.value.notice+'</p>');
 							cursor.continue();
 						}
 						
@@ -221,7 +248,9 @@
 							
 							cursor.continue();
 						} else {
-							writeToDB(noticeData);
+							if(online){
+								writeToDB(noticeData);
+								}
 						}
 					}
 				});
@@ -237,6 +266,7 @@
 						async: false,
 						success: function(data){
 							// do something
+							readFromDB();
 							console.log(data);
 						},
 						error: function(xhr, status, errorThrown){
@@ -248,116 +278,50 @@
 				
 				// entfernte Daten auslesen
 				function readFromDB(){
-					$.ajax({
-						type: 'POST',
-						url: 'noticeToDB.php',
-						async: true,
-						success: function(data){
-							var dbItemsJSON = $.parseJSON(data);
-							for(var i = 0; i < dbItemsJSON.notice.length; i++){
-								$('#noticeContainer').append('<p class="publish"><strong>'+dbItemsJSON.notice[i].title+': </strong> '+dbItemsJSON.notice[i].notice+'</p>');
-								}
-							
-							},
-						error: function(xhr, status, errorThrown){
-							console.log(status);
-							console.log(errorThrown);
-							}
-					});	
-				}
-				
-				/*
-				
-				// entfernte Daten auslesen
-				function readFromDB(){
-					$.ajax({
-						type: 'POST',
-						url: 'mysqlToIDB.php',
-						async: true,
-						success: function(data){
-							var dbItemsJSON = $.parseJSON(data);
-							for(var i = 0; i < dbItemsJSON.termine.length; i++){
-							
-								$('#'+dbItemsJSON.termine[i].timestamp).addClass('eintragGlobal');
+					$('#publishNotice DIV').html('');
+					if(online){
+						$.ajax({
+							type: 'POST',
+							url: 'noticeToDB.php',
+							async: true,
+							success: function(data){
+								var dbItemsJSON = $.parseJSON(data);
+								for(var i = 0; i < dbItemsJSON.notice.length; i++){
+									$('#publishNotice DIV').append('<p class="publish"><strong>'+dbItemsJSON.notice[i].title+': </strong> '+dbItemsJSON.notice[i].notice+'</p>');
+									}
 								
-								writeToLocalDB(dbItemsJSON.termine[i].timestamp,
-											   dbItemsJSON.termine[i].userid,
-											   dbItemsJSON.termine[i].uhrzeitvon,
-											   dbItemsJSON.termine[i].uhrzeitbis,
-											   dbItemsJSON.termine[i].eintrag);
-							}
-							
-						},
-						error: function(xhr, status, errorThrown){
-							console.log(status);
-							console.log(errorThrown);
-						}
-					});	
-				}
-				
-				// Daten lokal speichern
-				function writeToLocalDB(ts,uid,von,bis,etrg){
-					transactionDB = db.transaction(objectStoreName, "readwrite");
-					objectStore = transactionDB.objectStore(objectStoreName);
-					
-					request = objectStore.add({ timestamp: ts, uhrzeitvon: von, uhrzeitbis: bis, eintrag: etrg, userid: uid });
-					request.onsuccess = function(evt){
-						console.log('daten lokal geschrieben');
-					};
-					request.onerror = function(){
-						console.log('fehler beim schreiben der daten auf Lokal');
-					};
-					
-				}
-				
-				// lokale Daten löschen
-				function deleteLocalData(){
-					transactionDB = db.transaction(objectStoreName, "readwrite");
-					objectStore = transactionDB.objectStore(objectStoreName);
-					
-					request = objectStore.openCursor();
-					request.onsuccess = function(evt){
-						cursor = evt.target.result;
-						if(cursor){
-							console.log('ID: ' + cursor.key);
-							var deleteItems = objectStore.delete(cursor.key,objectStoreName);
-							deleteItems.onsuccess = function(evt){
-								console.log('lokaler Datensatz gelöscht');
-							};
-							deleteItems.onerror = function(){
-								console.log('konnte datenstaz nicht löschen');
-							}
-							cursor.continue();
-						} else {
-							console.log('keine Einträge mehr');
-							//location.reload();
-						}
+								},
+							error: function(xhr, status, errorThrown){
+								console.log(status);
+								console.log(errorThrown);
+								}
+						});	
+					} else {
+						$('#publishNotice DIV').html('Sie sind offline. Veröffentlichte Notizen könne nicht geladen werden. Sie können jedoch offline weiterarbeiten.');
 					}
 				}
-				
-				
-				
-			});
-			*/
-				
-				// Netzwerk-verbindung prüfen
-				function checkNetwork(){
-					var network = navigator.onLine;
-					console.log("online Status: " + network);
-					}
-					
-				checkNetwork();
 				
 				$(document).on('click', ".notice", function(){
 					$("#myModal").modal();
 					var myID = $(this).attr("id");
 					$("#noticeid").val(myID);
+
+					if(!online){
+						var pushBtn = $('#push');
+						pushBtn.attr("disabled", true);
+						pushBtn.html('Sie sind offline!!!');
+					}
+					
 				});
 				
 				$("#delete").on('click', function(){
 					currItem = $("#noticeid").val();
 					deleteLocalItem(currItem);
 				});
+				
+				if(!online){
+					$("#myAlert").modal();
+				}
 				
 			});
 		</script>
@@ -379,6 +343,26 @@
 							<button type="button" id="push" class="btn btn-default">Eintrag veröffentlichen</button>
 						</div>
 						<input type="hidden" id="noticeid" value="" />
+
+					</div>
+					<div class="modal-footer">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade bs-example-modal-sm" id="myAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog  modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Hinweis</h4>
+					</div>
+					<div class="modal-body">
+					
+						Sie Sind offline. Sie können Ihre Notizen jedoch lokal abspeichern.
 
 					</div>
 					<div class="modal-footer">
