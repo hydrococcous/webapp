@@ -19,7 +19,7 @@
 		$jsonArr = json_decode($_POST['notice'],true);
 	
 		for($i = 0; $i < count($jsonArr); $i++){	
-			$rows = $db->exec("INSERT INTO notice(title,notice) VALUES ('".$jsonArr[$i]['title']."','".utf8_urldecode($jsonArr[$i]['notice'])."')");
+			$rows = $db->exec("INSERT INTO notice(title,notice) VALUES ('".utf8_urldecode($jsonArr[$i]['title'])."','".utf8_urldecode($jsonArr[$i]['notice'])."')");
 			if($rows > 0){ echo json_encode($arr[0]); }
 			}
 		} else {

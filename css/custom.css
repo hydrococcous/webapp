@@ -216,14 +216,24 @@ TEXTAREA{
 }
 
 /* Notizen */
-P.notice{
+.notice{
 cursor:pointer;
 }
-P.notice:hover{
+.notice:hover{
 text-decoration:underline
 }
 
-P.publish{
-
+.noticeLocal H2:after{
+   content:' *';
+   color:red;
 }
+
+/*.noticePublish H2:after{
+   content:' *';
+   color:green;
+}*/
+
+
+
+
 
