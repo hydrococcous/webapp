@@ -367,8 +367,19 @@ class Template
         /**
          * Anpassung für Zeilenumbruch
          * Sandro Birke, 04.08.2014
+         * https://github.com/PHPOffice/PHPWord/issues/268
+         * 
+         Hi @ivanlanin I have solved it! In Template.php, line 340 add:
+         $replace = preg_replace('~\R~u', '</w:t><w:br/><w:t>', $replace);
+         Interestingly enough, Word 2010 and Word 2003 do not have a problem if I just use '<w:br/>', but OpenOffice 3.4 does not recognize the newlines. If I use '</w:t><w:br/></wt>', Word 2010, Word 2003 and OpenOffice 3.4 recognize the newline character.
+
+         I think the decision from here is whether we use '~\R~u' or '~(*BSR_ANYCRLF)\R~'. The first is interpreted as (?>\r\n|\n|\r|\f|\x0b|\x85|\x{2028}|\x{2029}) while the second is interpreted as (?>\r\n|\n|\r). The first may be better because of line 338 where utf8_encode() is used. Adding ~u to the expression adds support for UTF-8 and ASCII. Source:
+         http://stackoverflow.com/questions/18988536/php-regex-how-to-match-r-and-n-without-using-r-n
+
+         Let me know which expression is better and I'll gladly fork to add the feature!
          */
-        $replace = preg_replace('~\R~u', '</w:t><w:br/><w:t>', $replace);
+        
+        $replace = preg_replace('~\R~u', '</w:t><w:br/><w:t>', $replace, $limit);
         /**
          * Ende
          */

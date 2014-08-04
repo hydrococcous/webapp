@@ -98,13 +98,7 @@ if($post_data['write']){
     $ort = $post_data['ort'];
     $betreff = $post_data['betreff'];
     $text = $post_data['text'];
-    $gruesse = $post_data['gruesse'];
-    
-    var_dump($post_data['text']);
-    
-    $newText = preg_replace("~\R~u","<w:br/>",$post_data['text']);
-    $newTextArr = explode("###NEWPARAGRAPH###", $newText);
-    
+    $gruesse = $post_data['gruesse'];    
     
     // Marker befüllen
     $document->setValue('Vorname',$vorname);
@@ -114,9 +108,7 @@ if($post_data['write']){
     $document->setValue('PLZ',$plz);
     $document->setValue('Ort',$ort);
     $document->setValue('Betreff',$betreff);
-    
     $document->setValue('Text',$text);
-    
     $document->setValue('Grussformel',$gruesse); 
     $name = 'brief_beispiel_'.$now.'.docx';
 
