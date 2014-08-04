@@ -1,134 +1,136 @@
 <!DOCTYPE html>
 <html lang="de">
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-		<meta name="viewport" content="width=device-width; initial-scale=1"/>
-		<title>Präsentation WebApp</title>
-		
-		<!-- Bootstrap einbinden -->
-		<link href="bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
-		
-		<!-- HTML5 Shim und Respond.js einbinden -->
-		<!-- HTML5 und Responive-Unterstützung für Internetexplorer kleiner als IE9 -->
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      	<![endif]-->
-      	
-      	<!-- Custom StyleSheet -->
-      	<link href="css/fonts.css" rel="stylesheet" />
-      	<link href="css/custom.css" rel="stylesheet" />
-      	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	</head>
-	<body class="index">
-		
-		<div class="navbar-wrapper">
-			<div class="container">
-			<!-- Navigation - START -->
-			<nav class="navbar navbar-inverse" role="navigation">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-							<span class="sr-only">Navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a href="/webapp" class="navbar-brand">Einleitung</a>
-					</div>
-					<div class="navbar-collapse collapse">
-						<ul class="nav navbar-nav navbar-left">
-							<li><a href="moeglichkeiten.html">Möglichkeiten</a></li>
-							<li><a href="#">Link</a></li>
-							<li><a href="#">Link</a></li>
-						</ul>
-						<form class="navbar-form navbar-right">
-							<div class="form-group"></div>
-							<button class="btn btn-default" id="connect">Connect</button>
-						</form>
-					</div>
-				</div>
-			</nav>
-			<!-- Navigation - ENDE -->
-		</div>
-		</div>
-		
-		<!-- Impress - START -->
-		<div id="impress">
-		
-			<div id="thedifference" class="step slide" data-x="0" data-y="0" data-z="0" data-rotate="0">
-		        <h1>WebApp vs. App*</h1>
-		        <p>Was ist der Unterschied?</p>
-		        <img src="media/downloads/logo_html5.png" width="290" class="imageLeft" />
-		        <img src="media/downloads/logo_appstore.png" width="300"  class="imageRight" />
-		    </div>
-		    
-		    
-		    <div id="thedifference_detail" class="step slide" data-x="1000" data-y="0" data-z="-1500" data-rotate="65">
-		        <h1>App*</h1>
-		        <p>Eine App ist eine native Software, entwickelt für ein bestimmtes Betriebssystem. </p>
-		        <h1>WebApp*</h1>
-		        <p>Eine WebApp ist eine Anwendung die in einem Browser läuft.</p>
-		    </div>
-		    
-		    
-		    <div id="vorundnachteile" class="step slide" data-x="-1500" data-y="500" data-z="-3000" data-rotate="150">
-		        <div class="left">
-		        	<h1>Nachteile*</h1>
-		        	<ul>
-		        		<li class="entypo-icon" title="&#8854;">eingeschränketer Hardwarezugriff</li>
-		        		<li class="entypo-icon" title="&#8854;">keine Push-Nachrichten</li>
-		        		<li>&nbsp;</li>
-		        		<li><img src="media/downloads/motiv_vorundnachteile.png" width="350"  /></li>
-		        	</ul>
-		        </div>
-		        <div class="right">
-		        	<h1>Vorteile*</h1>
-		        	<ul>
-		        		<li class="entypo-icon" title="&oplus;">plattformunabhängig</li>
-		        		<li class="entypo-icon" title="&oplus;">freie Entwicklungsumgebung</li>
-		        		<li class="entypo-icon" title="&oplus;">schnelle Updates</li>
-		        		<li class="entypo-icon" title="&oplus;">nur ein Entwicklungsstrang</li>
-		        		<li class="entypo-icon" title="&oplus;">keine Abhängikeit von Stores</li>
-		        	</ul>
-		        </div>
-		        	        
-		    </div>
-		    
-			
-			<div id="wasistmobil" class="step slide" data-x="700" data-y="-1500" data-z="-4500" data-rotate="120">
-		        <h1>Mobil oder Desktop*</h1>
-		        <p>Was ist "Mobil" und was ist "Desktop"?</p>
-		        <img src="media/downloads/motiv_mobildesktop.png" width="600" />
-		    </div>
-		    
-		    
-		    <div id="wasisthtml" class="step slide" data-x="-500" data-y="2000" data-z="-6000" data-rotate="210">
-		        <h1>HTML5*</h1>
-		        <p>Was ist das?</p>
-		        <img src="media/downloads/motiv_html5technologien.png" width="700" />
-		    </div>
-		    
-		    <div id="waskannwebapp" class="step slide" data-x="-3000" data-y="-2500" data-z="-7500" data-rotate="0">
-		        <h1>WebApplication*</h1>
-		        <p>Was ist möglich?</p>
-		        <img src="http://web-dat.de/uploads/pics/what-is-a-webapp_02.png" />
-		    </div>
-			
-			
-		</div>
-		<!-- Impress - ENDE -->
-		
-		<!-- jQuery einbinden -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<!-- Bootstrap -->
-		<script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
-		<!-- ImpressJS -->
-		<script src="impress/impress.js"></script>
-		<script>impress().init();</script>
-		<!-- Eigene Scripte -->
-		<script src="js/function.js"></script>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width; initial-scale=1"/>
+<title>Präsentation WebApp</title>
 
-	</body>
+<!-- Bootstrap einbinden -->
+<link href="bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- HTML5 Shim und Respond.js einbinden -->
+<!-- HTML5 und Responive-Unterstützung für Internetexplorer kleiner als IE9 -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- Custom StyleSheet -->
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/custom.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body class="index">
+
+    <div class="navbar-wrapper">
+        <div class="container">
+            <!-- Navigation - START -->
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="/webapp" class="navbar-brand">Einleitung</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li><a href="moeglichkeiten.html">Möglichkeiten</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                        </ul>
+                        <form class="navbar-form navbar-right">
+                            <div class="form-group"></div>
+                            <button class="btn btn-default" id="connect">Connect</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navigation - ENDE -->
+        </div>
+    </div>
+
+        <!-- Impress - START -->
+        <div id="impress">
+
+                <div id="thedifference" class="step slide" data-x="0" data-y="0" data-z="0" data-rotate="0">
+                <h1>WebApp vs. App*</h1>
+                <p>Was ist der Unterschied?</p>
+                <img src="media/downloads/logo_html5.png" width="290" class="imageLeft" />
+                <img src="media/downloads/logo_appstore.png" width="300"  class="imageRight" />
+            </div>
+
+
+            <div id="thedifference_detail" class="step slide" data-x="1000" data-y="0" data-z="-1500" data-rotate="65">
+                <h1>App*</h1>
+                <p>Eine App ist eine native Software, entwickelt für ein bestimmtes Betriebssystem. </p>
+                <h1>WebApp*</h1>
+                <p>Eine WebApp ist eine Anwendung die in einem Browser läuft.</p>
+            </div>
+
+
+            <div id="vorundnachteile" class="step slide" data-x="-1500" data-y="500" data-z="-3000" data-rotate="150">
+
+                <div class="left">
+                        <h1>Nachteile*</h1>
+                        <ul>
+                                <li class="entypo-icon" title="&#8854;">eingeschränketer Hardwarezugriff</li>
+                                <li class="entypo-icon" title="&#8854;">keine Push-Nachrichten</li>
+                                <li>&nbsp;</li>
+                                <li><img src="media/downloads/motiv_vorundnachteile.png" width="350"  /></li>
+                        </ul>
+                </div>
+                <div class="right">
+                        <h1>Vorteile*</h1>
+                        <ul>
+                                <li class="entypo-icon" title="&oplus;">plattformunabhängig</li>
+                                <li class="entypo-icon" title="&oplus;">freie Entwicklungsumgebung</li>
+                                <li class="entypo-icon" title="&oplus;">schnelle Updates</li>
+                                <li class="entypo-icon" title="&oplus;">nur ein Entwicklungsstrang</li>
+                                <li class="entypo-icon" title="&oplus;">keine Abhängikeit von Stores</li>
+                        </ul>
+                </div>
+
+            </div>
+
+
+                <div id="wasistmobil" class="step slide" data-x="700" data-y="-1500" data-z="-4500" data-rotate="120">
+                <h1>Mobil oder Desktop*</h1>
+                <p>Was ist "Mobil" und was ist "Desktop"?</p>
+                <img src="media/downloads/motiv_mobildesktop.png" width="600" />
+            </div>
+
+
+            <div id="wasisthtml" class="step slide" data-x="-500" data-y="2000" data-z="-6000" data-rotate="210">
+                <h1>HTML5*</h1>
+                <p>Was ist das?</p>
+                <img src="media/downloads/motiv_html5technologien.png" width="700" />
+            </div>
+
+            <div id="waskannwebapp" class="step slide" data-x="-3000" data-y="-2500" data-z="-7500" data-rotate="0">
+                <h1>WebApplication*</h1>
+                <p>Was ist möglich?</p>
+
+                <img src="http://web-dat.de/uploads/pics/what-is-a-webapp_02.png" />
+            </div>
+
+
+        </div>
+        <!-- Impress - ENDE -->
+
+        <!-- jQuery einbinden -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
+        <!-- ImpressJS -->
+        <script src="impress/impress.js"></script>
+        <script>impress().init();</script>
+        <!-- Eigene Scripte -->
+        <script src="js/function.js"></script>
+
+    </body>
 </html>
