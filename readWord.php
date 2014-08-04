@@ -34,14 +34,24 @@
         
     $xmlStr = docx2text("results/brief_beispiel_04-08-14-20-56-00.docx"); // Save this contents to file
     
-    $tmpFile = tempnam('results/','tmp_');
-    $handle = fopen($tmpFile,'w');
-    fwrite($handle, $xmlStr);
-    fclose($handle);
-    rename($tmpFile,$tmpFile.'.xml');
+//    $tmpFile = tempnam('results/','tmp_');
+//    $handle = fopen($tmpFile,'w');
+//    fwrite($handle, $xmlStr);
+//    fclose($handle);
+//    rename($tmpFile,$tmpFile.'.xml');
+//    
+//    $xml = simplexml_load_file($tmpFile.'.xml');
+//    var_dump($xml);
     
-    $xml = simplexml_load_file($tmpFile.'.xml');
-    var_dump($xml);
-    
+
+$p = xml_parser_create();
+xml_parse_into_struct($p, $xmlStr, $vals, $index);
+xml_parser_free($p);
+echo '<pre>';
+echo "Index array\n";
+print_r($index);
+echo "\nVals array\n";
+print_r($vals);
+echo '</pre>';
     
 ?>
