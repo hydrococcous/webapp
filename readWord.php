@@ -1,17 +1,37 @@
 <?php
-    // PHPWord einbinden
-    include_once 'PHPWord/samples/Sample_Header.php';
+    
+    /**
+     * Quelle: http://www.jackreichert.com/2012/11/09/how-to-convert-docx-to-html/
+     * Quelle: http://webcheatsheet.com/php/reading_the_clean_text_from_docx_odt.php
+     */
 
-    // Read contents
-
-    $source = "results/brief_beispiel.docx";
-
-    echo date('H:i:s'), " Reading contents from `{$source}`", EOL;
-    $phpWord = \PhpOffice\PhpWord\IOFactory::load($source);
-    var_dump($phpWord);
-    // Save file
-    #echo write($phpWord, basename(__FILE__, '.php'), $writers);
-    if (!CLI) {
-        #include_once 'Sample_Footer.php';
+    $xmlFile = "results/brief_beispiel_04-08-14-14-36-52.docx";
+    
+    /**
+     * DOCX entpacken
+     */
+    
+    $zip = new ZipArchive;
+    if($zip->open($xmlFile) === true){
+        
+        $index =  $zip->locateName("word/document.xml");
+        
+        if($index !== false){
+            
+            $data = $zip->getFromIndex($index);
+            $zip->close();
+            
+        }
+        
+       print_r($data);
+        
+    } else {
+        echo 'Fehler beim öffnen!';
     }
+    
+    
+    
+    
+
+
 ?>
