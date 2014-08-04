@@ -363,7 +363,16 @@ class Template
             $replace = utf8_encode($replace);
         }
         $replace = htmlspecialchars($replace);
-
+        
+        /**
+         * Anpassung für Zeilenumbruch
+         * Sandro Birke, 04.08.2014
+         */
+        $replace = preg_replace('~\R~u', '</w:t><w:br/><w:t>', $replace);
+        /**
+         * Ende
+         */
+        
         $regExpDelim = '/';
         $escapedSearch = preg_quote($search, $regExpDelim);
         return preg_replace("{$regExpDelim}{$escapedSearch}{$regExpDelim}u", $replace, $documentPartXML, $limit);
