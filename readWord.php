@@ -15,6 +15,7 @@
      */
     function unzipDOCX($file){
         $zip = new ZipArchive;
+        
         if($zip->open($file) === true){
 
             $index =  $zip->locateName("word/document.xml");
