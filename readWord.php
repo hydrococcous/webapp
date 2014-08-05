@@ -32,8 +32,9 @@
             return "Fehler";
         }
         
-        
-    $xmlStr = docx2text("results/brief_beispiel_04-08-14-20-56-00.docx");
+    $post_data = filter_input_array(INPUT_POST);
+    
+    $xmlStr = docx2text("results/".$post_data['dat']);
 
     $parser = xml_parser_create();
     xml_parse_into_struct($parser, $xmlStr, $values, $index);
@@ -99,6 +100,108 @@
         #echo '</pre><hr />';  
     }
 
-    echo $html;
+    #echo $html;
     
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <!--<meta name="viewport" content="width=device-width; initial-scale=1"/>-->
+        <title>Präsentation WebApp</title>
+
+        <!-- Bootstrap einbinden -->
+        <link href="bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+
+        <!-- HTML5 Shim und Respond.js einbinden -->
+        <!-- HTML5 und Responive-Unterstützung für Internetexplorer kleiner als IE9 -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- Custom StyleSheet -->
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/custom.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body class="index">
+
+        <div class="navbar-wrapper">
+                <div class="container">
+                <!-- Navigation - START -->
+                <nav class="navbar navbar-inverse" role="navigation">
+                        <div class="container-fluid">
+                                <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                                <span class="sr-only">Navigation</span>	
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                        </button>
+                                        <a href="/webapp" class="navbar-brand">Einleitung</a>
+                                </div>
+                                <div class="navbar-collapse collapse">
+                                        <ul class="nav navbar-nav navbar-left">
+                                                <li><a href="moeglichkeiten.html">Möglichkeiten</a></li>
+                                                <li><a href="#">Link</a></li>
+                                                <li><a href="#">Link</a></li>
+                                        </ul>
+                                </div>
+                        </div>
+                </nav>
+                <!-- Navigation - ENDE -->
+        </div>
+        </div>
+
+        <div class="container">
+
+            <div class="jumbotron margTop">
+                
+                <div class="row">
+                    
+                    <div class="col-sm-7">
+                        
+                        <h2>Word-Dokument lesen</h2>  
+                    
+                    </div>
+                    
+                    <div class="col-sm-3">
+                        
+                        <form method="post">
+                            <br />
+                            <input class="form-control" name="dat" id="dat" value="" type="text" />
+                            <button type="submit" class="btn btn-default" id="write" name="write">Dokument lesen</button>
+
+                        </form>
+                        
+                    </div>
+                    <div class="col-sm-12" style="background: #fff; margin-top:20px; border-radius: 10px; padding: 20px;">
+
+                        <?php if(isset($post_data['dat'])) echo $html ?>
+                    
+                    </div>
+                    
+                    <div class="col-sm-12">
+                        
+                        <h2></h2>
+                    
+                    </div>
+                    
+                </div>
+
+            </div>	
+
+        </div>
+
+
+        <!-- jQuery einbinden -->
+        <script src="js/jquery/1.11.0/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

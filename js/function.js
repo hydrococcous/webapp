@@ -4,7 +4,7 @@ $(document).ready(function(){
 	
 	function connectToServer(){
 		// Websocket
-		socket = new WebSocket("ws://192.168.2.105:8000");
+		socket = new WebSocket("ws://192.168.178.30:8000");
 	 
 		// Nach dem öffnen des Sockets den Status anzeigen
 		socket.onopen 	= function(){ 
