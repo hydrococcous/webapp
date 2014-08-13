@@ -179,7 +179,8 @@
     <script>
         
         $(document).ready(function(){
-           
+            
+            // Tabs
             $(document).on('click', 'UL.tabList LI', function(){
                 var myIndex = $(this).index();
                 
@@ -196,6 +197,14 @@
                 });
                 
             });
+            
+            // Accordion
+            $(document).on('click', '.tabHead', function(){
+               $('.tabCont').hide('fast');
+               $(this).next('.tabCont').slideToggle('fast'); 
+            });
+            
+            
           
         });
         
