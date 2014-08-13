@@ -5,26 +5,66 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/sketch.js"></script>
         <script src="js/three.min.js"></script>
         <style>
             HTML, BODY{height:100%}
             *{margin: 0; padding: 0;}
-            CANVAS{widht:100%; height:100%}
+            CANVAS{border:1px dotted #ccc}
         </style>
     </head>
-    <body>
+    <body onLoad="zeichneCanvas()">
+        <!-- 2D Objekt - Canvas -->
+        <canvas id="canvas2D" height="400" width="400"></canvas>
+        <!-- 3D Cube - Canvas -->
+        <canvas id="canvas3D"></canvas>
+        <!-- Draw - Canvas -->
+        <div class="tools"></div>
+        <canvas id="canvasDraw" height="400" width="400"></canvas>
         
+        <!-- 2D Objekt - Script -->
+        <script>
+            function zeichneCanvas(){
+                var canvas2D = document.getElementById('canvas2D');
+                if(canvas2D.getContext){
+                    var context = canvas2D.getContext('2d');
+                    context.beginPath();
+                    context.lineWidth="6";
+                    context.strokeStyle="red";
+                    context.rect(5,5,290,140); 
+                    context.stroke();
+                    
+                    context.beginPath();
+                    context.lineWidth="2";
+                    context.strokeStyle="green";
+                    context.rect(20,20,100,100); 
+                    context.stroke();
+                    
+                    context.beginPath();
+                    context.lineWidth="4";
+                    context.strokeStyle="blue";
+                    context.rect(50,50,320,320); 
+                    context.stroke();
+
+                }
+            }
+        </script>
+        
+        <!-- 3D Cube - Script -->
         <script>
             // http://learningthreejs.com/
-            
+            // http://intridea.github.io/sketch.js/
+            // http://carvisualizer.plus360degrees.com/threejs/
+            var canvasW = 400;
+            var canvasH = 400;
             var scene = new THREE.Scene();
-            var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+            var camera = new THREE.PerspectiveCamera(50, canvasW / canvasH, 0.1, 1000);
+            var canvas3D = document.getElementById('canvas3D');
+            var renderer = new THREE.WebGLRenderer({canvas : canvas3D, alpha : true, antialias : true});
+            renderer.setSize(canvasW, canvasH);
+            //document.body.appendChild(renderer.domElement);
             
-            var renderer = new THREE.WebGLRenderer();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            document.body.appendChild(renderer.domElement);
-            
-            var geometry = new THREE.BoxGeometry(3,3,3);
+            var geometry = new THREE.BoxGeometry(2.4,2.4,2.4);
             
             var materials = [];
             for (var i = 0; i < 6; i ++) {
@@ -53,6 +93,18 @@
             
 
         </script>
+        
+        <!-- Draw - Script -->
+        <script>
+            $(function(){
+                $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
+                    $('.tools').append("<a href='#canvasDraw' data-color='" + this + "' style='width: 10px; background: " + this + ";'>ccc</a> ");
+                  });
+                $('#canvasDraw').sketch();
+            });
+        </script>
+        
+        
         
     </body>
 </html>

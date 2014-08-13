@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--<html lang="de" manifest="offline.appcache">-->
+<html ng-app="eu_app">
+<head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <!--<meta name="viewport" content="width=device-width; initial-scale=1"/>-->
+        <title>Präsentation WebApp</title>
+
+        <!-- Bootstrap einbinden -->
+        <link href="../bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+        
+        <!-- eigenes CSS einbinden -->
+        <link href="../css/style.css" rel="stylesheet" />
+        
+        <!-- jQuery einbinden -->
+        <script src="../js/jquery/1.11.0/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="../bootstrap-3.1.1/js/bootstrap.min.js"></script>
+        
+        <!-- HTML5 Shim und Respond.js einbinden -->
+        <!-- HTML5 und Responive-Unterstützung für Internetexplorer kleiner als IE9 -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- Custom StyleSheet -->
+<link href="../css/fonts.css" rel="stylesheet" />
+<link href="../css/custom.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<body class="index">
+
+        <div class="navbar-wrapper">
+                <div class="container">
+                <!-- Navigation - START -->
+                <nav class="navbar navbar-inverse" role="navigation">
+                        <div class="container-fluid">
+                                <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                                <span class="sr-only">Navigation</span>	
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                        </button>
+                                        <a href="/webapp" class="navbar-brand">Einleitung</a>
+                                </div>
+                                <div class="navbar-collapse collapse">
+                                        <ul class="nav navbar-nav navbar-left">
+                                                <li><a href="moeglichkeiten.html">Möglichkeiten</a></li>
+                                                <li><a href="#">Link</a></li>
+                                                <li><a href="#">Link</a></li>
+                                        </ul>
+                                        <form class="navbar-form navbar-right">
+                                                <div class="form-group"></div>
+                                                <button class="btn btn-default" id="connect">Connect</button>
+                                        </form>
+                                </div>
+                        </div>
+                </nav>
+                <!-- Navigation - ENDE -->
+        </div>
+        </div>
+
+        <div class="container">
+
+            <div class="jumbotron margTop jumbotronCustom">
+                
+                <h1>EU Staaten*</h1>
+                <p>Im Detail</p>
+
+            </div>	
+
+        </div>
+
+    <div class="container">
+        
+        <div class="myTabs">
+            
+            <ul class="tabList">
+                <li class="listActive">Tab 1</li>
+                <li>Tab 2</li>
+                <li>Tab 3</li>
+            </ul>
+            
+            <div class="tabContWrap">
+                <h3 class="tabHead headActive">Tab 1</h3>
+                <div class="tabCont tabActive">
+                    <p>1 Eine wunderbare Heiterkeit hat meine ganze Seele eingenommen, gleich den süßen Frühlingsmorgen, die ich mit ganzem Herzen genieße. Ich bin allein und freue mich meines Lebens in dieser Gegend, die für solche Seelen geschaffen ist wie die meine. Ich bin so glücklich, mein Bester, so ganz in dem Gefühle von ruhigem Dasein versunken, daß meine Kunst darunter leidet. Ich könnte jetzt nicht zeichnen, nicht einen Strich, und bin nie ein größerer Maler gewesen als in diesen Augenblicken</p>
+                </div>
+                <h3 class="tabHead">Tab 2</h3>
+                <div class="tabCont">
+                    <p>2 Eine wunderbare Heiterkeit hat meine ganze Seele eingenommen, gleich den süßen Frühlingsmorgen, die ich mit ganzem Herzen genieße. Ich bin allein und freue mich meines Lebens in dieser Gegend, die für solche Seelen geschaffen ist wie die meine. Ich bin so glücklich, mein Bester, so ganz in dem Gefühle von ruhigem Dasein versunken, daß meine Kunst darunter leidet. Ich könnte jetzt nicht zeichnen, nicht einen Strich, und bin nie ein größerer Maler gewesen als in diesen Augenblicken</p>
+                </div>
+                <h3 class="tabHead">Tab 3</h3>
+                <div class="tabCont">
+                    <p>3 Eine wunderbare Heiterkeit hat meine ganze Seele eingenommen, gleich den süßen Frühlingsmorgen, die ich mit ganzem Herzen genieße. Ich bin allein und freue mich meines Lebens in dieser Gegend, die für solche Seelen geschaffen ist wie die meine. Ich bin so glücklich, mein Bester, so ganz in dem Gefühle von ruhigem Dasein versunken, daß meine Kunst darunter leidet. Ich könnte jetzt nicht zeichnen, nicht einen Strich, und bin nie ein größerer Maler gewesen als in diesen Augenblicken</p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <style>
+            
+            DIV.myTabs H3.tabHead{
+                display:block;
+            }
+            
+            DIV.myTabs UL.tabList{
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                display:none;
+            }
+            
+            DIV.myTabs UL.tabList LI{
+                display:block;
+                background-color: #999;
+                color:#000;
+                padding: 10px;
+                margin: 0 5px 0 0;
+                float:left;
+                border-top-right-radius: 5px;
+                font-size: 18px;
+                cursor: pointer;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+            }
+            
+            DIV.myTabs DIV.tabCont{
+                display:none;
+                border:1px solid #999;
+                border-bottom-left-radius: 5px;
+            }
+            
+            DIV.myTabs DIV.tabCont.tabActive{
+                display:block;
+            }
+            
+            DIV.myTabs DIV.tabCont P{
+                padding: 10px;
+            }
+            
+            DIV.myTabs H3.tabHead{
+                background-color: #999;
+                color:#000;
+                padding: 10px;
+                margin: 0;
+                border-top-left-radius: 5px;
+                font-size: 18px;
+                cursor: pointer;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+            }
+            
+            .listActive,
+            .headActive{
+                font-weight:bold;
+            }
+            
+            @media (min-width: 580px) {
+                DIV.myTabs H3.tabHead{
+                    display:none;
+                }
+                
+                DIV.myTabs UL.tabList{
+                    display:block;
+                }
+                
+                DIV.myTabs DIV.tabCont{
+                    border-top-right-radius: 5px;
+                    border-bottom-left-radius: 0;
+                }
+            }            
+        </style>
+
+    </div>
+
+    <!--<script src="../js/angular/1.3.0/angular.js"></script>-->
+    <script>
+        
+        $(document).ready(function(){
+           
+            $(document).on('click', 'UL.tabList LI', function(){
+                var myIndex = $(this).index();
+                
+                $('UL.tabList LI').removeClass('listActive');
+                $(this).addClass('listActive');
+                
+                $('.tabContWrap DIV.tabCont').removeClass('tabActive');
+                $('.tabContWrap DIV.tabCont').each(function(index){
+                    if(index == myIndex){
+                        $(this).addClass('tabActive');
+                        $(this).parent().children('H3').removeClass('headActive');
+                        $(this).prev('H3').addClass('headActive');
+                    }
+                });
+                
+            });
+          
+        });
+        
+    </script>
+  
+</body>
+</html>

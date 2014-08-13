@@ -1,0 +1,239 @@
+/* global */
+/**{
+    margin:0;
+    padding:0;
+}*/
+
+BODY.index{
+	background: #ffffff; /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #cccccc 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#cccccc 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#cccccc 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #ffffff 0%,#cccccc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+UL.eu_list{
+    padding-left: 0px!important
+}
+UL.eu_list LI{
+    padding: 0;
+    float:left;
+}
+
+.eu_list H2{
+    margin:5px 5px 0 5px;
+    background-color: #999;
+    color:#000;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+UL.eu_list LI:first-child H2{
+    margin:0 5px 0 5px;
+}
+
+.eu_list H2 SPAN.title:after{
+    content: ' \00BB';
+}
+
+.eu_list H2 SPAN.thumb{
+    float: right
+}
+
+P.inner{
+    display: none;
+    height: 100px;
+    margin: 0 5px 5px 5px;
+    border:1px solid #999;
+    border-top:none;
+    font-size:11px;
+    position: relative;
+
+}
+
+P.inner SPAN.wrap{
+    display: block;
+    padding: 5px 0 0 5px
+}
+
+P.inner SPAN.wrap SPAN{
+    display: block;
+    margin: 0 0 5px 0
+}
+
+UL.eu_list LI{
+    width: 100%;
+    list-style-type: none;
+}
+
+IMG.flag{
+    height: 75px;
+    width:100px;
+    border-left:1px solid #999;
+    border-bottom:1px solid #999;
+    position: absolute;
+    top:0;
+    right:0;
+}
+IMG.flagThumb{
+    height: 25px;
+    width: 34px;
+}
+
+H2.hideThumb SPAN.thumb{display: none;}
+
+/* Navigation */
+DIV.navigation{
+    background-color: #ebebeb;
+    padding: 15px 10px 15px 15px;
+    position: fixed;
+    top: 0px; 
+    width: 100%;
+    z-index: 100;
+}
+
+UL.listNav{list-style-type: none;}
+
+UL.listNav LI{
+    float: left;
+    margin-right: 20px;
+}
+
+UL.listNav LI A:after{
+    content: ' \00BB'
+}
+
+UL.listNav LI A{
+    color: #FFCC00;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight:bold;
+}
+
+UL.listNav LI LABEL{
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight:bold;
+}
+
+.jumbotronCustom{
+    padding-left:15px;
+}
+
+/* Clear Float - Start */
+UL.eu_list:before, UL.eu_list:after,
+UL.listNav:before, UL.listNav:after,
+UL.tabList:before, UL.tabList:after{
+    content: ' ';
+    display: table;
+}
+
+UL.eu_list:after,
+UL.listNav:after,
+UL.tabList:after{
+    clear:both;
+}
+
+UL.eu_list,
+UL.listNav,
+UL.tabList{
+    zoom: 1
+}
+/* Clear Float - Ende */
+
+@media (min-width: 580px) {
+/*    DIV.container{
+        padding: 10px;
+        margin: 10px;
+        padding-top: 10px;
+        border:none;
+    }*/
+    
+    UL.eu_list LI{
+        width: 50%;
+    }
+    
+    P.inner{
+        display: block;
+    }
+    
+    .eu_list H2{
+        margin:0px 5px 0 5px;
+        cursor: default;
+        font-size: 13px;
+        padding: 5px;
+    }
+
+    .eu_list H2 SPAN.title:after{
+        content: '';
+    }
+    
+    .eu_list H2 SPAN.thumb{
+        display: none;
+    }
+    
+    UL.listNav LI A{
+        font-size: 12px;
+    }
+    
+    DIV.navigation{
+        padding: 15px 10px 15px 30px;
+    }
+    
+    UL.listNav LI LABEL{
+        font-size: 12px;
+    }
+
+
+}
+
+@media (min-width: 920px) {
+    UL.eu_list LI{
+        width: 33.33%;
+    }
+}
+
+@media (min-width: 1200px) {
+    UL.eu_list LI{
+        width: 25%;
+    }
+}
+
+/* Tabs */
+DIV.eu-tabs-container UL.eu-tabs LI{
+    background-color: #003399;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding:5px;
+    display: inline-block
+}
+
+DIV.eu-tabs-container,
+DIV.eu-tabs-outer-content{
+    margin: 5px;
+}
+
+DIV.eu-tabs-content{
+    border:2px #003399 dashed;
+}
+
+DIV.eu-tabs-content DIV{
+    display: none;
+    padding: 5px;
+}
+
+DIV.eu-tabs-content DIV.active{
+    display:block !important;
+}
+
+/* Test */
+.container{
+
+}

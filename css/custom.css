@@ -234,6 +234,10 @@ text-decoration:underline
 }*/
 
 
+/* Bootstrap Anpassung */
+BODY.index .col-6{
+    min-height: 200px;
+}
 
 
 
