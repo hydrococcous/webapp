@@ -35,14 +35,12 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href="/webapp" class="navbar-brand">Einleitung</a>
+                        <a href="/webapp" class="navbar-brand">Home</a>
                     </div>
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-left">
+                        <!--<ul class="nav navbar-nav navbar-left">
                             <li><a href="moeglichkeiten.html">Möglichkeiten</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                        </ul>
+                        </ul>-->
                         <form class="navbar-form navbar-right">
                             <div class="form-group"></div>
                             <button class="btn btn-default" id="connect">Connect</button>
@@ -57,7 +55,14 @@
         <!-- Impress - START -->
         <div id="impress">
 
-                <div id="thedifference" class="step slide" data-x="0" data-y="0" data-z="0" data-rotate="0">
+            <div id="webdevelopment" class="step slide" data-x="0" data-y="0" data-z="1000" data-rotate="0">
+                <h1>WebApp*</h1>
+                <p>Willkommen!</p>
+                <img src="media/downloads/frage.png" width="400" class="imageLeft" />
+            </div>
+            
+            
+            <div id="thedifference" class="step slide" data-x="900" data-y="0" data-z="-1000" data-rotate="0">
                 <h1>WebApp vs. App*</h1>
                 <p>Was ist der Unterschied?</p>
                 <img src="media/downloads/logo_html5.png" width="290" class="imageLeft" />
@@ -65,41 +70,38 @@
             </div>
 
 
-            <div id="thedifference_detail" class="step slide" data-x="1000" data-y="0" data-z="-1500" data-rotate="65">
-                <h1>App*</h1>
-                <p>Eine App ist eine native Software, entwickelt für ein bestimmtes Betriebssystem. </p>
-                <h1>WebApp*</h1>
-                <p>Eine WebApp ist eine Anwendung die in einem Browser läuft.</p>
+            <div id="vorundnachteile" class="step slide" data-x="1500" data-y="0" data-z="-1500" data-rotate="65">
+                <div class="left">
+                <h1>Nachteile*</h1>
+                <p>
+                    - Eingeschränkter Speicher- und Hardwarezugriff
+                    <br />
+                    - Keine Pushnachrichten
+                </p>
+                </div>
+                <div class="right">
+                <h1>Vorteile*</h1>
+                <p>
+                    - Plattformunabhängigkeit<br />
+                    - Schnelle Updates möglich<br />
+                    - Nur ein Entwicklungsstrang
+                </p>
+                </div>
+                <img style="margin-left:200px;" src="media/downloads/motiv_vorundnachteile.png" width="350"  />
             </div>
 
 
-            <div id="vorundnachteile" class="step slide" data-x="-1500" data-y="500" data-z="-3000" data-rotate="150">
+            <div id="browser" class="step slide" data-x="-1500" data-y="500" data-z="-3000" data-rotate="150">
 
-                <div class="left">
-                        <h1>Nachteile*</h1>
-                        <ul>
-                                <li class="entypo-icon" title="&#8854;">eingeschränketer Hardwarezugriff</li>
-                                <li class="entypo-icon" title="&#8854;">keine Push-Nachrichten</li>
-                                <li>&nbsp;</li>
-                                <li><img src="media/downloads/motiv_vorundnachteile.png" width="350"  /></li>
-                        </ul>
-                </div>
-                <div class="right">
-                        <h1>Vorteile*</h1>
-                        <ul>
-                                <li class="entypo-icon" title="&oplus;">plattformunabhängig</li>
-                                <li class="entypo-icon" title="&oplus;">freie Entwicklungsumgebung</li>
-                                <li class="entypo-icon" title="&oplus;">schnelle Updates</li>
-                                <li class="entypo-icon" title="&oplus;">nur ein Entwicklungsstrang</li>
-                                <li class="entypo-icon" title="&oplus;">keine Abhängikeit von Stores</li>
-                        </ul>
-                </div>
+                <h1>Browser*</h1>
+                <p>Eine WebApp für alle!</p>
+                <img src="media/downloads/web-browsers.png" width="600" class="imageLeft" />
 
             </div>
 
 
                 <div id="wasistmobil" class="step slide" data-x="700" data-y="-1500" data-z="-4500" data-rotate="120">
-                <h1>Mobil oder Desktop*</h1>
+                <h1>Endgeräte*</h1>
                 <p>Was ist "Mobil" und was ist "Desktop"?</p>
                 <img src="media/downloads/motiv_mobildesktop.png" width="600" />
             </div>
@@ -108,7 +110,7 @@
             <div id="wasisthtml" class="step slide" data-x="-500" data-y="2000" data-z="-6000" data-rotate="210">
                 <h1>HTML5*</h1>
                 <p>Was ist das?</p>
-                <img src="media/downloads/motiv_html5technologien.png" width="700" />
+                <img src="media/downloads/motiv_html5technologien.png" width="550" />
             </div>
 
             <div id="waskannwebapp" class="step slide" data-x="-3000" data-y="-2500" data-z="-7500" data-rotate="0">
@@ -116,6 +118,33 @@
                 <p>Was ist möglich?</p>
 
                 <img src="http://web-dat.de/uploads/pics/what-is-a-webapp_02.png" />
+            </div>
+            
+            <div id="beispiele" class="step slide" data-x="-3000" data-y="-2500" data-z="-15000" data-rotate="2000">
+                <h1>Beispiele*</h1>
+                <p>Eine Auswahl</p>
+                <img src="media/downloads/example.png" width="250" />
+                <ul class="floatingList">
+                    <li><a href="indexedDB.html" target="_blank">clientseitige Datenbanken &raquo;</a></li>
+                    <li><a href="#">WebSockets &raquo;</a></li>
+                    <li><a href="makeWord.php" target="_blank">Word schreiben &raquo;</a></li>
+                    <li><a href="readWord.php" target="_blank">Word lesen &raquo;</a></li>
+                    <li><a href="webGL.html" target="_blank">WebGL &raquo;</a></li>
+                </ul>
+            </div>
+            
+            <div id="responsive" class="step slide" data-x="-3000" data-y="-500" data-z="-15000" data-rotate="2000">
+                <h1>Responsive Design*</h1>
+                <p>Templates</p>
+                <img src="media/downloads/Responsive-Design.png" width="550" />
+                <ul class="floatingList">
+                    <li><a href="templates/template_navigation.html" target="_blank">Navigation top &raquo;</a></li>
+                    <li><a href="templates/template_offcanvas.html" target="_blank">Navigation right &raquo;</a></li>
+                    <li><a href="templates/template_overview.html" target="_blank">Grid Beispiel &raquo;</a></li>
+                    <li><a href="templates/template_ui.html" target="_blank">UI &raquo;</a></li>
+                    <br clear="all" />
+                </ul>
+                
             </div>
 
 

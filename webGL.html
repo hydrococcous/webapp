@@ -1,110 +1,323 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>WebGL</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <!--<meta name="viewport" content="width=device-width; initial-scale=1"/>-->
+        <title>Präsentation WebApp</title>
+
+        <!-- Bootstrap einbinden -->
+        <link href="bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+
+        <!-- HTML5 Shim und Respond.js einbinden -->
+        <!-- HTML5 und Responive-Unterstützung für Internetexplorer kleiner als IE9 -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- Custom StyleSheet -->
+<link href="css/fonts.css" rel="stylesheet" />
+<link href="css/custom.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        
+</head>
+<body class="index">
+
+        <div class="navbar-wrapper">
+                <div class="container">
+                <!-- Navigation - START -->
+                <nav class="navbar navbar-inverse" role="navigation">
+                        <div class="container-fluid">
+                                <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                                <span class="sr-only">Navigation</span>	
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                        </button>
+
+                                </div>
+                                <div class="navbar-collapse collapse">
+                                        <form class="navbar-form navbar-right">
+                                                <div class="form-group"></div>
+                                                <button class="btn btn-default" id="close">Close</button>
+                                        </form>
+                                </div>
+                        </div>
+                </nav>
+                <!-- Navigation - ENDE -->
+        </div>
+        </div>
+
+        <div class="container">
+
+            <div class="jumbotron margTop">
+                
+                
+                <h1>Canvas &amp; WebGL*</h1>
+                <p>Grafik im Browser</p>
+            </div>	
+
+        </div>
+
+        <div class="container">
+            
+            <div class="col-6 col-sm-6 col-lg-3">
+                <h2>Primitives</h2>
+                <p>Einfache Formen zeichnen</p>
+                <p><a class="btn btn-default" href="#" id="btn-primitives" role="button">Details</a></p>
+            </div>
+            
+            <div class="col-6 col-sm-6 col-lg-3">
+                <h2>Malen</h2>
+                <p>mit Farbe und Pinsel</p>
+                <p><a class="btn btn-default" href="#" id="btn-draw" role="button">Details</a></p>
+            </div>
+            
+            <div class="col-6 col-sm-6 col-lg-3">
+                <h2>3D</h2>
+                <p>Objekte in Echtzeit</p>
+                <p><a class="btn btn-default" href="#" id="btn-3d" role="button">Details</a></p>
+            </div>
+                
+            <div class="col-6 col-sm-6 col-lg-3">
+                <h2>Beispiel 1</h2>
+                <p>Car Visualizer</p>
+                <p><a class="btn btn-default" href="http://carvisualizer.plus360degrees.com/threejs/" target="_blank" role="button">Details</a></p>
+            </div>
+            
+            <div class="col-6 col-sm-6 col-lg-3">
+                <h2>Beispiel 2</h2>
+                <p>Wasser Simulation</p>
+                <p><a class="btn btn-default" href="http://madebyevan.com/webgl-water/" target="_blank" role="button">Details</a></p>
+            </div>
+            <!--
+            <div class="row" id="">
+                    <canvas id="canvas2D" height="400" width="400"></canvas>
+                    <canvas id="canvas3D"></canvas>
+                    <div class="tools"></div>
+                    <canvas id="canvasDraw" height="400" width="400"></canvas>
+            </div>
+            -->
+
+        </div>
+
+
+        <!-- jQuery einbinden -->
+        <script src="js/jquery/1.11.0/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
+        <!-- Eigene Scripte -->
+        <script src="js/function.js"></script>
         <script src="js/sketch.js"></script>
         <script src="js/three.min.js"></script>
-        <style>
-            HTML, BODY{height:100%}
-            *{margin: 0; padding: 0;}
-            CANVAS{border:1px dotted #ccc}
-        </style>
-    </head>
-    <body onLoad="zeichneCanvas()">
-        <!-- 2D Objekt - Canvas -->
-        <canvas id="canvas2D" height="400" width="400"></canvas>
-        <!-- 3D Cube - Canvas -->
-        <canvas id="canvas3D"></canvas>
-        <!-- Draw - Canvas -->
-        <div class="tools"></div>
-        <canvas id="canvasDraw" height="400" width="400"></canvas>
         
         <!-- 2D Objekt - Script -->
         <script>
+            
+            // Formen
             function zeichneCanvas(){
+                // http://www.senaeh.de/html5-zeichnen-auf-dem-canvas/
                 var canvas2D = document.getElementById('canvas2D');
+                console.log(canvas2D);
                 if(canvas2D.getContext){
                     var context = canvas2D.getContext('2d');
+
+                    // Rechteck
                     context.beginPath();
                     context.lineWidth="6";
                     context.strokeStyle="red";
                     context.rect(5,5,290,140); 
                     context.stroke();
-                    
+
+                    // Dreieck
                     context.beginPath();
+                    context.moveTo(350, 30);
                     context.lineWidth="2";
-                    context.strokeStyle="green";
-                    context.rect(20,20,100,100); 
+                    context.strokeStyle="black";
+                    context.lineTo(750, 60);
+                    context.lineTo(330, 170);
+                    context.lineTo(350, 30);
                     context.stroke();
-                    
+
+                    // Kreis
                     context.beginPath();
-                    context.lineWidth="4";
-                    context.strokeStyle="blue";
-                    context.rect(50,50,320,320); 
-                    context.stroke();
+                    context.fillStyle = "#FF00ff";
+                    context.beginPath();
+                    context.arc(120, 300, 100, 0, Math.PI * 2, true);
+                    context.closePath();
+                    context.fill();
 
+                    // Verlauf
+                    context.beginPath();
+                    var gradient = context.createLinearGradient(570, 500, 275, 200);
+                    gradient.addColorStop(0, "#FF0000");
+                    gradient.addColorStop(1, "#0000FF");
+                    context.fillStyle = gradient;
+                    context.fillRect(330, 240, 250, 150);
+
+                    // Schreiben
+                    context.beginPath();
+                    context.fillStyle = "#000000";
+                    context.font="40px Arial";
+                    context.fillText("Kann das weg, oder ist das Text?",200,220);  
+
+                    }
                 }
-            }
-        </script>
-        
-        <!-- 3D Cube - Script -->
-        <script>
-            // http://learningthreejs.com/
-            // http://intridea.github.io/sketch.js/
-            // http://carvisualizer.plus360degrees.com/threejs/
-            var canvasW = 400;
-            var canvasH = 400;
-            var scene = new THREE.Scene();
-            var camera = new THREE.PerspectiveCamera(50, canvasW / canvasH, 0.1, 1000);
-            var canvas3D = document.getElementById('canvas3D');
-            var renderer = new THREE.WebGLRenderer({canvas : canvas3D, alpha : true, antialias : true});
-            renderer.setSize(canvasW, canvasH);
-            //document.body.appendChild(renderer.domElement);
             
-            var geometry = new THREE.BoxGeometry(2.4,2.4,2.4);
-            
-            var materials = [];
-            for (var i = 0; i < 6; i ++) {
-               materials.push(
-                  new THREE.MeshBasicMaterial(
-                     {color: Math.random() * 0xffffff }));
-            }
-            
-            var cube = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial( materials ));
-            scene.add(cube);
-            camera.position.z = 5;
-      
-            function render(){
-                requestAnimationFrame(render);
-                cube.rotation.x += 0.01;
-                cube.rotation.y += 0.01;
-                renderer.render(scene, camera);
-            }
-            
-            render();
-            
-            $(document).on('click','CANVAS',function(){
-                //requestAnimationFrame(render);
-                //cube.rotation.x += 0.1;
-            });
-            
-
-        </script>
-        
-        <!-- Draw - Script -->
-        <script>
+            // malen
             $(function(){
                 $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
-                    $('.tools').append("<a href='#canvasDraw' data-color='" + this + "' style='width: 10px; background: " + this + ";'>ccc</a> ");
+                    $('.tools').append("<a class='picker' href='#canvasDraw' data-color='" + this + "' style='background: " + this + ";'>&nbsp;</a> ");
+                  });
+                $.each([3, 10, 20, 40], function() {
+                    $('.tools').append("<a class='brush' href='#canvasDraw' data-size='" + this + "' style='background: #ccc'>" + this + "</a> ");
                   });
                 $('#canvasDraw').sketch();
             });
+            
+            // 3D-Cube
+            function render3d(){
+                var canvasW = 800;
+                var canvasH = 400;
+                var scene = new THREE.Scene();
+                var camera = new THREE.PerspectiveCamera(50, canvasW / canvasH, 0.1, 1000);
+                var canvas3D = document.getElementById('canvas3D');
+                var renderer = new THREE.WebGLRenderer({canvas : canvas3D, alpha : true, antialias : true});
+                renderer.setSize(canvasW, canvasH);
+                //document.body.appendChild(renderer.domElement);
+
+                var geometry = new THREE.BoxGeometry(2.7,2.7,2.7);
+
+                var materials = [];
+                for (var i = 0; i < 6; i ++) {
+                   materials.push(
+                      new THREE.MeshBasicMaterial(
+                         {color: Math.random() * 0xffffff }));
+                }
+
+                var cube = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial( materials ));
+                scene.add(cube);
+                camera.position.z = 5;
+
+                function render(){
+                    requestAnimationFrame(render);
+                    cube.rotation.x += 0.01;
+                    cube.rotation.y += 0.01;
+                    renderer.render(scene, camera);
+                }
+
+                render();
+            }
+            
+            // jQuery
+            $(document).ready(function(){
+                
+
+                $(document).on('click','#btn-primitives', function(){
+                    $("#modal-primitives").modal();
+                });
+                
+                $(document).on('click','#btn-draw', function(){
+                    $("#modal-draw").modal();
+                });
+                
+                $(document).on('click','#btn-3d', function(){
+                    $("#modal-3d").modal();
+                });
+
+                $('#modal-primitives').on('shown.bs.modal', function(e){
+                    zeichneCanvas();
+                });
+                
+                $('#modal-3d').on('shown.bs.modal', function(e){
+                    render3d();
+                });
+                
+                
+
+                });
         </script>
         
+        <!-- Modal - primitives -->
+        <div class="modal fade bs-example-modal-lg" id="modal-primitives" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Primitives</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <canvas id="canvas2D" height="400" width="800"></canvas>
+
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal - Zeichnen -->
+        <style>
+            .tools A.picker{
+                width:40px;
+                height: 20px;
+                display: inline-block;
+                text-decoration: none;
+            }
+            
+            .tools A.brush{
+                width:40px;
+                height: 20px;
+                display: inline-block;
+                text-align: center;
+                text-decoration: none;
+            }
+        </style>
+        <div class="modal fade bs-example-modal-lg" id="modal-draw" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Draw</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="tools"></div>
+                        <canvas id="canvasDraw" height="400" width="800"></canvas>
+
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal - 3D -->
+        <div class="modal fade bs-example-modal-lg" id="modal-3d" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">3D</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <canvas id="canvas3D"></canvas>
+
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
         
         
-    </body>
+        
+</body>
 </html>

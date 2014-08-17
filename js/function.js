@@ -57,7 +57,9 @@ $(document).ready(function(){
 	});
  	
  	
- 	
+ 	$(document).on('click', '#close', function(){
+            window.close()
+        })
  	
 		
 });

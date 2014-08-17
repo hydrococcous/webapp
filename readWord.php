@@ -141,14 +141,13 @@
                                                 <span class="icon-bar"></span>
                                                 <span class="icon-bar"></span>
                                         </button>
-                                        <a href="/webapp" class="navbar-brand">Einleitung</a>
+
                                 </div>
                                 <div class="navbar-collapse collapse">
-                                        <ul class="nav navbar-nav navbar-left">
-                                                <li><a href="moeglichkeiten.html">Möglichkeiten</a></li>
-                                                <li><a href="#">Link</a></li>
-                                                <li><a href="#">Link</a></li>
-                                        </ul>
+                                        <form class="navbar-form navbar-right">
+                                                <div class="form-group"></div>
+                                                <button class="btn btn-default" id="close">Close</button>
+                                        </form>
                                 </div>
                         </div>
                 </nav>
@@ -201,6 +200,15 @@
         <script src="js/jquery/1.11.0/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="bootstrap-3.1.1/js/bootstrap.min.js"></script>
+           <script>
+            $(document).ready(function(){
+                
+              $(document).on('click', '#close', function(){
+                    window.close();
+                });
+            });
+        
+        </script>
 
 
 </body>

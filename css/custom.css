@@ -125,6 +125,20 @@ DIV.slide A:hover SPAN{
 	width:600px;
 }
 
+.floatingList LI{
+    list-style-type: none;
+    float:left;
+    margin: 0 20px 0 0;
+}
+
+.floatingList:first-child LI{
+    margin: 0 0 0 0;
+}
+
+.floatingList{
+    padding:0
+}
+
 /*
  * Controller
  */
@@ -228,15 +242,19 @@ text-decoration:underline
    color:red;
 }
 
-/*.noticePublish H2:after{
-   content:' *';
-   color:green;
-}*/
+.notice, .noticePublish{
+    min-height: 200px;
+}
 
 
 /* Bootstrap Anpassung */
 BODY.index .col-6{
     min-height: 200px;
+}
+
+.list-group-item{
+    background-color: transparent!important;
+    border: 1px solid #000
 }
 
 
